@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public class Slips {
 
     private int slipNumber;
-    private int patronId;
-    private String vinNumber;
+    private Patrons patronId;
+    private Cars carId;
     private LocalDateTime arrivalTime;
     private LocalDateTime departureTime;
     private double hourlyPrice;
@@ -20,20 +20,20 @@ public class Slips {
         this.slipNumber = slipNumber;
     }
 
-    public int getPatronId() {
+    public Patrons getPatronId() {
         return patronId;
     }
 
-    public void setPatronId(int patronId) {
+    public void setPatronId(Patrons patronId) {
         this.patronId = patronId;
     }
 
-    public String getVinNumber() {
-        return vinNumber;
+    public Cars getCarId() {
+        return carId;
     }
 
-    public void setVinNumber(String vinNumber) {
-        this.vinNumber = vinNumber;
+    public void setCarId(Cars carId) {
+        this.carId = carId;
     }
 
     public LocalDateTime getArrivalTime() {

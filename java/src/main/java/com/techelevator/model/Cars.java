@@ -1,13 +1,25 @@
 package com.techelevator.model;
 
-public class Cars {
+import org.springframework.security.core.parameters.P;
 
+import java.lang.ref.PhantomReference;
+
+public class Cars {
+    private int carId;
     private String make;
     private String model;
     private String color;
     private String licensePlate;
     private String vinNumber;
-    private int patronId;
+    private Patrons patronId;
+
+    public int getCarId() {
+        return carId;
+    }
+
+    public void setCarId(int carId) {
+        this.carId = carId;
+    }
 
     public String getMake() {
         return make;
@@ -49,11 +61,11 @@ public class Cars {
         this.vinNumber = vinNumber;
     }
 
-    public int getPatronId() {
+    public Patrons getPatronId() {
         return patronId;
     }
 
-    public void setPatronId(int patronId) {
+    public void setPatronId(Patrons patronId) {
         this.patronId = patronId;
     }
 }

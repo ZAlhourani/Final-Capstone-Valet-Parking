@@ -3,7 +3,7 @@ package com.techelevator.model;
 public class ParkingLot {
 
     private int spotNumber;
-    private String vinNumber;
+    private int carId;
     private boolean isAvailable;
 
     public int getSpotNumber() {
@@ -14,12 +14,12 @@ public class ParkingLot {
         this.spotNumber = spotNumber;
     }
 
-    public String getVinNumber() {
-        return vinNumber;
+    public int getCarId() {
+        return carId;
     }
 
-    public void setVinNumber(String vinNumber) {
-        this.vinNumber = vinNumber;
+    public void setCarId(int carId) {
+        this.carId = carId;
     }
 
     public boolean isAvailable() {

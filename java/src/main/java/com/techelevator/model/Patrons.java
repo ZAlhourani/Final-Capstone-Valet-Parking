@@ -2,16 +2,10 @@ package com.techelevator.model;
 
 public class Patrons {
     private int patronId;
-    private User user;
+    private User userId;
     private String name;
-    private int phoneNumber;
+    private String phoneNumber;
 
-    public Patrons(int patronId, User user, String name, int phoneNumber) {
-        this.patronId = patronId;
-        this.user = user;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
 
     public int getPatronId() {
         return patronId;
@@ -21,12 +15,12 @@ public class Patrons {
         this.patronId = patronId;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(User user) {
+        this.userId = user;
     }
 
     public String getName() {
@@ -37,11 +31,11 @@ public class Patrons {
         this.name = name;
     }
 
-    public int getPhoneNumber() {
+    public String  getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
