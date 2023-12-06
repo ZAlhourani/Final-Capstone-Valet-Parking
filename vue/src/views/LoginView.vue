@@ -65,7 +65,6 @@ export default {
 #login{
   font-size: 25px;
   font-style: italic;
-  
 }
 .form-input-group {
   margin-bottom: 1rem;

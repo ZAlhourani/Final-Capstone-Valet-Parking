@@ -2,6 +2,8 @@ import { createRouter as createRouter, createWebHistory } from 'vue-router'
 import { useStore } from 'vuex'
 
 // Import components
+import TotalCost from '../views/TotalCost.vue';
+import ArriveTime from '../views/ArriveTime.vue';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
@@ -16,6 +18,22 @@ import RegisterView from '../views/RegisterView.vue';
  * If they have (or don't need to) they're allowed to go about their way.
  */
 const routes = [
+  {
+    path: '/total-cost',
+    name: 'total-cost',
+    component: TotalCost,
+    meta: {
+      requiresAuth: false 
+    }
+  },
+  {
+    path: '/arrive-time',
+    name: 'arrive-time',
+    component: ArriveTime,
+    meta: {
+      requiresAuth: true 
+    }
+  },
   {
     path: '/',
     name: 'home',
@@ -70,5 +88,8 @@ router.beforeEach((to) => {
   }
   // Otherwise, do nothing and they'll go to their next destination
 });
+
+// make a forbiden view to say dude you are not allowed to see this 
+// also redirect someone to their correct role if then are on a path to one they shouldnt be going to
 
 export default router;
