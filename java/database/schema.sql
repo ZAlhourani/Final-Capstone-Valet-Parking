@@ -45,12 +45,25 @@ CREATE TABLE slips (
 );
 
 CREATE TABLE parking_lot (
-    spot_number SERIAL,
+    spot_number INTEGER UNIQUE,
     car_id INTEGER,
     is_available boolean NOT NULL,
     CONSTRAINT PK_parking_lot PRIMARY KEY (spot_number),
-    CONSTRAINT FK_car_id FOREIGN KEY (car_id) REFERENCES cars(car_id)
+    CONSTRAINT FK_car_id FOREIGN KEY (car_id) REFERENCES cars(car_id),
+    CONSTRAINT spot_number_equal_or_less_10 CHECK (spot_number <= 10)
 
 );
+
+INSERT INTO parking_lot (spot_number, car_id, is_available)
+values (1, NULL, true),
+       (2, NULL, true),
+       (3, NULL, true),
+       (4, NULL, true),
+       (5, NULL, true),
+       (6, NULL, true),
+       (7, NULL, true),
+       (8, NULL, true),
+       (9, NULL, true),
+       (10, NULL, true);
 
 COMMIT TRANSACTION;

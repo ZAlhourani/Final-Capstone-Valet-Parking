@@ -4,5 +4,7 @@ import com.techelevator.model.ParkingLot;
 
 public interface ParkingLotDao {
 
-    ParkingLot getAvailability();
+    ParkingLot getParkingLot();
+    // determine parameters
+    ParkingLot updateParkingLot();
 }
