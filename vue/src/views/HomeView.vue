@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home div">
     <h1>Home</h1>
     <p>You must be authenticated to see this</p>
   </div>
@@ -9,3 +9,7 @@
 export default {
 };
 </script>
+
+<style>
+
+</style>

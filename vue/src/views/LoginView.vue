@@ -1,4 +1,5 @@
 <template>
+  <img src="Parking Valet Img.png" alt="Parking Valet Logo">
   <div id="login">
     <form v-on:submit.prevent="login">
       <h1 >Please Sign In</h1>
@@ -60,11 +61,27 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+#login{
+  font-size: 25px;
+  font-style: italic;
+  
+}
 .form-input-group {
   margin-bottom: 1rem;
+  text-align: center;
 }
 label {
   margin-right: 0.5rem;
+}
+html{
+  background-color: rgb(1, 11, 35);
+  text-align: center;
+}
+body{
+  color: azure;
+  display: flex;
+  justify-content: center;
+  margin-top: 20rem;
 }
 </style>
