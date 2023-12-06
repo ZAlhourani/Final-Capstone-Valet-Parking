@@ -1,11 +1,14 @@
 <template>
   <div id="capstone-app">
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'arrive-time' }" v-if="$store.state.token">Arrival Time</router-link>&nbsp;|&nbsp;
-      <!-- Conditionally render the "Total Cost" link based on the current route name -->
-      <router-link v-bind:to="{ name: 'total-cost' }" v-show="$route.name !== 'login'">Total Cost</router-link>
+      <router-link v-bind:to="{ name: 'total-cost' }" v-show="$route.name !== 'login'">Total Cost</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{name: 'lot-availability'}">lot Availability</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'check-in' }" v-if="$store.state.token">Check In</router-link>
 
     </div>
     <router-view />
@@ -15,10 +18,7 @@
 <script>
 export default {
   computed: {
-    // Computed property to determine if the arrival time link should be shown
     showArrivalTime() {
-      // Assuming you have a way to determine if the user is on the login page
-      // Adjust this condition based on your routing or auth state
       return this.$route.name !== 'login';
     }
   }

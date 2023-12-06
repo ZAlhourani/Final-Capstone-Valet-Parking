@@ -19,7 +19,6 @@
       },
       submitTime() {
         console.log('Time submitted:', this.arrivalTime);
-        // Add your submit logic here
       }
     }
   };
