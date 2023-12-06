@@ -2,10 +2,10 @@
     <div class="request-pickup">
       <h1>Request a Pickup</h1>
       <form @submit.prevent="submitPickupRequest">
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="location">Pickup Location:</label>
           <input type="text" id="location" v-model="pickupData.location" required>
-        </div>
+        </div> -->
   
         <div class="form-group">
           <label for="time">Pickup Time:</label>

@@ -1,6 +1,7 @@
 <template>
     <div class="check-in-form">
       <h2>Car Check-In</h2>
+      <h2><strong>center this and make the boxes smaller</strong></h2>
       <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="make">Car Make:</label>

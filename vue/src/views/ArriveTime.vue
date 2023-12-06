@@ -1,6 +1,7 @@
 <template>
     <div class="arrive-time">
       <h1>Arrival Time</h1>
+      <h2>center this and make the box smaller</h2>
       <input type="time" v-model="arrivalTime" @change="updateTime">
       <button @click="submitTime">Set Arrival Time</button>
     </div>
