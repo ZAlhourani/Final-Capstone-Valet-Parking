@@ -68,8 +68,6 @@ public class JdbcSlipsDao implements SlipsDao {
     @Override
     public Slips createNewSlip(Slips newSlip) {
 
-        Slips slip;
-
         String sql = "insert into slips (patron_id, car_id, arrival_time, departure_time, hourly_price, total) " +
                 "values (?,?,?,?,?,?) returning slip_number;";
 
@@ -98,7 +96,6 @@ public class JdbcSlipsDao implements SlipsDao {
 
             if(numberOfRowsAffected == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
-
             }
             int slipNumber = slip.getSlipNumber();
 

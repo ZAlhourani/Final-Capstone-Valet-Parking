@@ -80,7 +80,6 @@ public class JdbcCarsDao implements CarsDao {
 
     @Override
     public Cars createNewCar(Cars newCar) {
-        Cars car;
 
         String sql = "insert into cars (make, model, color, license_plate, vin_number, patron_id) " +
                 "values (?,?,?,?,?,?) returning car_id;";
