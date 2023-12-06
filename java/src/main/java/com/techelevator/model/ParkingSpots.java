@@ -1,9 +1,11 @@
 package com.techelevator.model;
 
-public class ParkingLot {
+import java.util.HashMap;
+import java.util.Map;
 
+public class ParkingSpots {
     private int spotNumber;
-    private int carId;
+    private Cars carId;
     private boolean isAvailable;
 
     public int getSpotNumber() {
@@ -14,11 +16,11 @@ public class ParkingLot {
         this.spotNumber = spotNumber;
     }
 
-    public int getCarId() {
+    public Cars getCarId() {
         return carId;
     }
 
-    public void setCarId(int carId) {
+    public void setCarId(Cars carId) {
         this.carId = carId;
     }
 
