@@ -2,6 +2,10 @@ import { createRouter as createRouter, createWebHistory } from 'vue-router'
 import { useStore } from 'vuex'
 
 // Import components
+import CheckInForm from '../views/CheckInForm.vue'
+import Slips from '../views/Slip.vue';
+import LotAvailability from '../views/LotAvailability.vue';
+import RequestPickup from '../views/RequestPickup.vue';
 import TotalCost from '../views/TotalCost.vue';
 import ArriveTime from '../views/ArriveTime.vue';
 import HomeView from '../views/HomeView.vue';
@@ -19,6 +23,41 @@ import RegisterView from '../views/RegisterView.vue';
  */
 const routes = [
   {
+    path: '/check-in',
+    name: 'check-in',
+    component: CheckInForm,
+    meta: {
+      requiresAuth: true // include this if the route requires authentication
+    }
+  },
+  
+  {
+    path: '/slips',
+    name: 'slips',
+    component: Slips,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/lot-availability',
+    name: 'lot-availability',
+    component: LotAvailability,
+    meta: {
+      requiresAuth: true 
+    }
+  },
+  
+  {
+    path:'/request-pickup',
+    name: 'request-pickup',
+    component: RequestPickup,
+    meta: {
+      requiresAuth: true
+    } 
+  },
+
+  {
     path: '/total-cost',
     name: 'total-cost',
     component: TotalCost,
@@ -26,6 +65,7 @@ const routes = [
       requiresAuth: false 
     }
   },
+
   {
     path: '/arrive-time',
     name: 'arrive-time',
@@ -34,6 +74,7 @@ const routes = [
       requiresAuth: true 
     }
   },
+
   {
     path: '/',
     name: 'home',
@@ -42,6 +83,7 @@ const routes = [
       requiresAuth: true
     }
   },
+
   {
     path: "/login",
     name: "login",
@@ -50,6 +92,7 @@ const routes = [
       requiresAuth: false
     }
   },
+
   {
     path: "/logout",
     name: "logout",
@@ -58,6 +101,7 @@ const routes = [
       requiresAuth: false
     }
   },
+
   {
     path: "/register",
     name: "register",
