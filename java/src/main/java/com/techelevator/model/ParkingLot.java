@@ -1,10 +1,23 @@
 package com.techelevator.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ParkingLot {
 
+    Map<Integer, Boolean> parkingSpots = new HashMap<>();
     private int spotNumber;
     private int carId;
     private boolean isAvailable;
+
+    public Map<Integer, Boolean> getParkingSpots() {
+        return parkingSpots;
+    }
+
+    public void setParkingSpots(Map<Integer, Boolean> parkingSpots) {
+        this.parkingSpots = parkingSpots;
+    }
 
     public int getSpotNumber() {
         return spotNumber;
