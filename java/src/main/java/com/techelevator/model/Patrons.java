@@ -15,11 +15,11 @@ public class Patrons {
         this.patronId = patronId;
     }
 
-    public User getUser() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUser(User user) {
+    public void setUserId(User user) {
         this.userId = user;
     }
 

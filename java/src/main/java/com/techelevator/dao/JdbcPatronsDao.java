@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Patrons;
 import com.techelevator.model.User;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -42,17 +43,65 @@ public class JdbcPatronsDao implements PatronsDao{
 
     @Override
     public Patrons getPatronById(int patronId) {
-        return null;
+
+        Patrons patron = new Patrons();
+
+        String sql = "select * from patrons where patron_id = ?;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patronId);
+
+            if (results.next()) {
+                patron = mapRowToPatrons(results);
+            }
+        }catch (CannotGetJdbcConnectionException e){
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return patron;
     }
 
     @Override
     public Patrons createNewPatron(Patrons newPatron) {
-        return null;
+
+        String sql = "insert into patrons (user_id, name, phone_number " +
+                "values (?,?,?) returning patron_id";
+        try {
+            int patronId = jdbcTemplate.queryForObject(sql, Integer.class, newPatron.getUserId(),
+                    newPatron.getName(), newPatron.getPhoneNumber());
+
+            return getPatronById(patronId);
+
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+
+
     }
 
     @Override
     public Patrons updatePatron(Patrons patron) {
-        return null;
+
+        String sql = "update patrons set user_id = ?, name = ?, phone_number = ? where patron_id = ?;";
+
+        try {
+            int numberOfRowsAffected = jdbcTemplate.update(sql, patron.getUserId(), patron.getName(),
+                    patron.getPhoneNumber());
+
+            if(numberOfRowsAffected == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            }
+
+            int patronId = patron.getPatronId();
+            return getPatronById(patronId);
+
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+
     }
 
     private Patrons mapRowToPatrons(SqlRowSet results){
@@ -63,7 +112,7 @@ public class JdbcPatronsDao implements PatronsDao{
 
         int patronUserId = results.getInt("user_id");
         User userId = userDao.getUserById(patronUserId);
-        patron.setUser(userId);
+        patron.setUserId(userId);
 
         patron.setName(results.getString("name"));
         patron.setPhoneNumber(results.getString("phone_number"));
