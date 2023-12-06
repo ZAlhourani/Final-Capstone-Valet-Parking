@@ -1,5 +1,5 @@
 <template>
-  <img src="Parking Valet Img.png" alt="Parking Valet Logo">
+  <img src="Parking Img.png" alt="Parking Valet Logo">
   <div id="login">
     <form v-on:submit.prevent="login">
       <h1 >Please Sign In</h1>
@@ -63,8 +63,10 @@ export default {
 
 <style>
 #login{
-  font-size: 25px;
+  font-size: 20px;
   font-style: italic;
+  color: rgb(130, 2, 251);
+  margin-bottom: 700px;
 }
 .form-input-group {
   margin-bottom: 1rem;
@@ -74,11 +76,11 @@ label {
   margin-right: 0.5rem;
 }
 html{
-  background-color: rgb(1, 11, 35);
+   background-color: rgb(1, 11, 35);  
   text-align: center;
 }
 body{
-  color: azure;
+  /* color: azure; */
   display: flex;
   justify-content: center;
   margin-top: 20rem;

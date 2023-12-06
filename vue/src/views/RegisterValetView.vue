@@ -1,5 +1,5 @@
 <template>
-  <div id="rv">
+    <div id="rv">
   <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '900px', height: '1000px'}">
   <div id="register" class="text-center">
     <form v-on:submit.prevent="register">
@@ -19,12 +19,12 @@
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
-      <button type="submit">Create Account</button>
-      <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
-      <div>
-      <button type="submit">Create Account</button>
-      <p><router-link v-bind:to="{ name: 'registervaletview' }">New Valet? Create an account here.</router-link></p>
+      <div class="form-input-group">
+        <label for="code">Code</label>
+        <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
+      <button type="submit">Create Valet Account</button>
+      <p><router-link v-bind:to="{ name: 'registervaletview' }">Already have an account? Log in.</router-link></p>
     </form>
   </div>
 </div>
@@ -40,20 +40,21 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'user',
+        Code: '',
+        role: 'admin',
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
+      registrationErrorMsg: 'There were problems registering this admin.',
     };
   },
   methods: {
     register() {
-      if (this.user.password != this.user.confirmPassword) {
+      if (this.admin.password != this.admin.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
         authService
-          .register(this.user)
+          .register(this.admin)
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
@@ -73,7 +74,7 @@ export default {
     },
     clearErrors() {
       this.registrationErrors = false;
-      this.registrationErrorMsg = 'There were problems registering this user.';
+      this.registrationErrorMsg = 'There were problems registering this admin.';
     },
   },
 };
@@ -94,6 +95,4 @@ label {
   margin-top: 20px;
   color: rgb(130, 2, 251);
 }
-
-
 </style>

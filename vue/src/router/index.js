@@ -8,6 +8,7 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import RegisterValetView from '../views/RegisterValetView.vue'
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -18,6 +19,7 @@ import RegisterView from '../views/RegisterView.vue';
  * If they have (or don't need to) they're allowed to go about their way.
  */
 const routes = [
+
   {
     path: '/total-cost',
     name: 'total-cost',
@@ -65,7 +67,16 @@ const routes = [
     meta: {
       requiresAuth: false
     }
-  }
+   },
+  {
+    path: "/registervaletview",
+    name: "registervaletview",
+    component: RegisterValetView,
+    meta: {
+      requiresAuth: false
+    }
+  },
+
 ];
 
 // Create the router
