@@ -5,12 +5,9 @@
       <router-link v-bind:to="{name: 'lot-availability'}">lot Availability</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slip</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;|&nbsp;
-
     </nav>
     <h1>Servizio di Auto</h1>
-    
-    <p>You must be authenticated to see this</p>
-    
+        
   
   </div>
 </template>
@@ -20,7 +17,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home {
   height: 100vh;
   background: #0a0a0a; 

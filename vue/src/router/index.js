@@ -2,6 +2,7 @@ import { createRouter as createRouter, createWebHistory } from 'vue-router'
 import { useStore } from 'vuex'
 
 // Import components
+import ValetRequestPickup from '../views/ValetRequestPickup.vue';
 import CheckInForm from '../views/CheckInForm.vue'
 import Slips from '../views/Slip.vue';
 import LotAvailability from '../views/LotAvailability.vue';
@@ -24,6 +25,14 @@ import RegisterValetView from '../views/RegisterValetView.vue'
  */
 const routes = [
 
+  {
+    path: '/valet/request-pickup',
+    name: 'valet-request-pickup',
+    component: ValetRequestPickup,
+    meta: {
+      requiresAuth: true
+    }
+  },
   {
     path: '/check-in',
     name: 'check-in',

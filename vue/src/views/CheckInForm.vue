@@ -16,7 +16,7 @@
           <label for="color">Car Color:</label>
           <input id="color" v-model="car.color" required>
         </div>
-        <!-- <div></div> -->
+        <div></div>
         <div class="form-group">
           <label for="license">License Plate:</label>
           <input id="license" v-model="car.licensePlate" required>
