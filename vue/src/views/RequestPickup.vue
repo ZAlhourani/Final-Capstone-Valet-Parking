@@ -3,8 +3,6 @@
       <h1>Request a Pickup</h1>
       <form @submit.prevent="submitPickupRequest">
         <div class="form-group">
-          <label for="location">Pickup Location:</label>
-          <input type="text" id="location" v-model="pickupData.location" required>
         </div>
   
         <div class="form-group">
@@ -35,11 +33,8 @@
     },
     methods: {
       submitPickupRequest() {
-        // Replace with actual API call or Vuex action
         console.log('Pickup request submitted:', this.pickupData);
-        // Clear form after submission for demonstration purposes
         this.pickupData = { location: '', time: '', notes: '' };
-        // Inform the user of a successful request (you could replace this with proper user feedback)
         alert('Your pickup request has been submitted.');
       }
     }

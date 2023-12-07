@@ -7,13 +7,11 @@
         <input id="car-id" v-model="pickupRequest.carId" required>
       </div>
 
-      <!-- Optionally, include fields for patron details if needed -->
       <div class="form-group">
         <label for="patron-name">Patron Name:</label>
         <input id="patron-name" v-model="pickupRequest.patronName">
       </div>
 
-      <!-- Include any other fields that might be necessary -->
 
       <button type="submit">Request Pickup</button>
     </form>
