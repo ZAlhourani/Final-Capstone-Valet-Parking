@@ -6,10 +6,12 @@
       <router-link v-bind:to="{ name: 'arrive-time' }" v-if="$store.state.token">Arrival Time</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'total-cost' }" v-show="$route.name !== 'login'">Total Cost</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{name: 'lot-availability'}">lot Availability</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">lot Availability</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'check-in' }" v-if="$store.state.token">Check In</router-link>
+      <router-link v-bind:to="{ name: 'check-in' }" v-if="$store.state.token">Check In</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'valet-request-pickup' }">Valet Request Pickup</router-link>
 
+      
     </div>
     <router-view />
   </div>
