@@ -7,7 +7,7 @@
       <router-link v-bind:to="{ name: 'total-cost' }" v-show="$route.name !== 'login'">Total Cost</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{name: 'lot-availability'}">lot Availability</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slip</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'check-in' }" v-if="$store.state.token">Check In</router-link>
 
     </div>
@@ -25,8 +25,6 @@ export default {
 };
 </script>
 <style>
-
-
 
 #nav {
   background-color: #333; 

@@ -1,6 +1,9 @@
 <template>
-    <div id="rv">
+  <div id="rv">
+  <div class="image-text-container">
+  <div class="image-container">
   <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '900px', height: '1000px'}">
+    </div>
   <div id="register" class="text-center">
     <form v-on:submit.prevent="register">
       <h1>Create Account</h1>
@@ -21,11 +24,12 @@
       </div>
       <div class="form-input-group">
         <label for="code">Code</label>
-        <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
+        <input type="password" id="code" v-model="user.code" required />
       </div>
       <button type="submit">Create Valet Account</button>
-      <p><router-link v-bind:to="{ name: 'registervaletview' }">Already have an account? Log in.</router-link></p>
-    </form>
+      <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      </form>
+    </div>
   </div>
 </div>
 </template>
@@ -40,7 +44,7 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
-        Code: '',
+        code: '',
         role: 'admin',
       },
       registrationErrors: false,
@@ -49,12 +53,12 @@ export default {
   },
   methods: {
     register() {
-      if (this.admin.password != this.admin.confirmPassword) {
+      if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
         authService
-          .register(this.admin)
+          .register(this.user)
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
@@ -89,10 +93,13 @@ label {
   margin-right: 0.5rem;
 }
 #register{
-  font-size: 20px;
+  font-size: 30px;
   font-style: italic;
-  padding-bottom: 300px;
+  /* padding-bottom: 300px; */
   margin-top: 20px;
   color: rgb(130, 2, 251);
+  text-shadow: 0 0 10px rgba(130, 2, 251, 1);
+  margin-bottom: 20px;
+  margin-top: 100px;
 }
 </style>

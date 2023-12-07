@@ -1,6 +1,11 @@
 <template>
   <div id="rv">
-  <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '900px', height: '1000px'}">
+  <div class="image-text-container">
+  <div class="image-container">
+    <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '900px', height: '1000px'}">
+      </div>
+    <div class="text-container">
+    </div>
   <div id="register" class="text-center">
     <form v-on:submit.prevent="register">
       <h1>Create Account</h1>
@@ -25,7 +30,8 @@
       <button type="submit">Create Account</button>
       <p><router-link v-bind:to="{ name: 'registervaletview' }">New Valet? Create an account here.</router-link></p>
       </div>
-    </form>
+     </form>
+    </div>
   </div>
 </div>
 </template>
@@ -80,6 +86,9 @@ export default {
 </script>
 
 <style scoped>
+.image-text-container {
+  display: flex;
+}
 .form-input-group {
   margin-bottom: 1rem;
   text-align: center;
@@ -88,12 +97,21 @@ label {
   margin-right: 0.5rem;
 }
 #register{
-  font-size: 20px;
+  font-size: 30px;
   font-style: italic;
-  padding-bottom: 300px;
+  /* padding-bottom: 300px; */
   margin-top: 20px;
   color: rgb(130, 2, 251);
+  text-shadow: 0 0 10px rgba(130, 2, 251, 1);
+  margin-bottom: 20px;
+  margin-top: 100px;
 }
+ .image-container {
+  width: 700px;
+  height: 800px;
+  max-width: 100%;
+  max-height: 100%;
+} 
 
 
 </style>
