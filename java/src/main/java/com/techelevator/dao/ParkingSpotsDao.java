@@ -7,7 +7,8 @@ import java.util.List;
 public interface ParkingSpotsDao {
 
     List<ParkingSpots> getAllParkingSpots();
+    List<ParkingSpots> getParkingSpotsWithCars(boolean isAvailable);
     ParkingSpots getParkingSpotBySpotNumber(int spotNumber);
-    ParkingSpots getParkingSpotByAvailability(boolean isAvailable);
+    List<ParkingSpots> getParkingSpotByAvailability(boolean isAvailable);
     ParkingSpots updateParkingSpot(ParkingSpots parkingSpot);
 }
