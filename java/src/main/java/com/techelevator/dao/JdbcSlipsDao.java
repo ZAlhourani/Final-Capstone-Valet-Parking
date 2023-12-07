@@ -8,10 +8,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class JdbcSlipsDao implements SlipsDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -63,6 +64,25 @@ public class JdbcSlipsDao implements SlipsDao {
         }
         return slip;
 
+    }
+
+    @Override
+    public Slips getSlipByCarId(int carId) {
+
+        Slips slip = new Slips();
+
+        String sql = "select * from slips where car_id = ?;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, carId);
+
+            if (results.next()) {
+                slip = mapRowToSlips(results);
+            }
+        }catch (CannotGetJdbcConnectionException e){
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return slip;
     }
 
     @Override
