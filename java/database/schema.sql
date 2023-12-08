@@ -25,7 +25,7 @@ CREATE TABLE cars (
     model varchar(50),
     color varchar(50),
     license_plate varchar(50),
-    vin_number varchar(17) NOT NULL UNIQUE,
+    vin_number varchar(17) NOT NULL,
     patron_id INTEGER NOT NULL,
     CONSTRAINT PK_car PRIMARY KEY (car_id),
     CONSTRAINT FK_patron_id FOREIGN KEY (patron_id) REFERENCES patrons(patron_id)
@@ -54,16 +54,16 @@ CREATE TABLE parking_spots (
 
 );
 
-INSERT INTO parking_spots (spot_number, car_id, is_available)
-values (1, NULL, true),
-       (2, NULL, true),
-       (3, NULL, true),
-       (4, NULL, true),
-       (5, NULL, true),
-       (6, NULL, true),
-       (7, NULL, true),
-       (8, NULL, true),
-       (9, NULL, true),
-       (10, NULL, true);
+INSERT INTO parking_spots (spot_number, is_available)
+values (1, true),
+       (2, true),
+       (3, true),
+       (4, true),
+       (5, true),
+       (6, true),
+       (7, true),
+       (8, true),
+       (9, true),
+       (10, true);
 
 COMMIT TRANSACTION;

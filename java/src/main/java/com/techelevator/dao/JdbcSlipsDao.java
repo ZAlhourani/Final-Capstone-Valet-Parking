@@ -93,7 +93,7 @@ public class JdbcSlipsDao implements SlipsDao {
 
         try {
             int slipNumber = jdbcTemplate.queryForObject(sql, Integer.class,
-                    newSlip.getPatronId(), newSlip.getCarId(), newSlip.getArrivalTime(),
+                    newSlip.getPatronId().getPatronId(), newSlip.getCarId().getCarId(), newSlip.getArrivalTime(),
                     newSlip.getDepartureTime(), newSlip.getHourlyPrice(), newSlip.getTotal());
 
             return getSlipBySlipNumber(slipNumber);
