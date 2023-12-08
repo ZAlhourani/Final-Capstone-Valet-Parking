@@ -48,30 +48,74 @@
   </template>
   
   <script>
-  export default {
-    data() {
-      return {
-        car: {
-          make: '',
-          model: '',
-          color: '',
-          licensePlate: '',
-          vinNumber: ''
-        },
-        patron: {
-          name: '',
-          phoneNumber: ''
-        },
-        arrivalTime: ''
+  
+import CarService from '../services/CarsService'; 
+import PatronService from '../services/PatronsService'; 
+
+export default {
+  data() {
+    return {
+      car: {
+        make: '',
+        model: '',
+        color: '',
+        licensePlate: '',
+        vinNumber: ''
+      },
+      patron: {
+        name: '',
+        phoneNumber: ''
+      },
+      arrivalTime: '' 
+    };
+  },
+  methods: {
+    submitForm() {
+      if (!this.validateForm()) return;
+
+      const newCar = {
+        make: this.car.make,
+        model: this.car.model,
+        color: this.car.color,
+        licensePlate: this.car.licensePlate,
+        vinNumber: this.car.vinNumber
       };
+    
+      const newPatron = {
+        name: this.patron.name,
+        phoneNumber: this.patron.phoneNumber,
+        arrivalTime: this.arrivalTime 
+      };
+
+      CarService.createNewCar(newCar)
+        .then(carResponse => {
+          console.log('Car created successfully', carResponse);
+          return PatronService.createNewPatron(newPatron);
+        })
+        .then(patronResponse => {
+          console.log('Patron created successfully', patronResponse);
+
+          
+        })
+        .catch(error => {
+          console.error('An error occurred during form submission', error);
+        });
     },
-    methods: {
-      submitForm() {
-        console.log('Form data:', this.car, this.patron, this.arrivalTime);
-      }
+    validateForm() {
+     let isValid = true;
+     let errorMessage = '';
+
+     if(!this.car.make) {
+      errorMessage += 'Car was not read right'
+     }
+    },
+    clearForm() {
+      
     }
-  };
-  </script>
+  }
+};
+</script>
+
   
   <style>
  
