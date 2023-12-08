@@ -30,7 +30,7 @@ export default {
     showUserNav(){
       console.log(this.$store.state)
       if(this.$store.state){
-        if (this.$store.state.user){
+        if (this.$store.state.user && this.$store.state.user.authorities){
         return this.$store.state.user.authorities[0].name === 'ROLE_USER'
       }
       }
@@ -38,8 +38,8 @@ export default {
     },
     showAdminNav(){
       if(this.$store.state){
-      if(this.$store.state.user){
-        return this.$store.state.user.authorities[0].name === 'ROLE_ADMIN'
+      if(this.$store.state.user && this.$store.state.user.authorities){
+        return this.$store.state.user.authorities[0].name === 'ROLE_VALET'
       }
     }
       return false;
