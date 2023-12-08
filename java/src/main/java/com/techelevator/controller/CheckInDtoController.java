@@ -41,6 +41,7 @@ private final CarsDao carsDao;
          newPatron.setPhoneNumber(checkInDto.getPhoneNumber());
          newPatron = patronsDao.createNewPatron(newPatron);
 
+
          newCar.setMake(checkInDto.getMake());
          newCar.setModel(checkInDto.getModel());
          newCar.setColor(checkInDto.getColor());
