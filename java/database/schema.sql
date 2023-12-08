@@ -2,6 +2,10 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, cars, patrons, slips, parking_lot, parking_spots;
 
+BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS users, cars, patrons, slips, parking_lot;
+
 CREATE TABLE users (
    user_id SERIAL,
    username varchar(50) NOT NULL UNIQUE,
