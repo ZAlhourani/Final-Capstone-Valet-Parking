@@ -41,7 +41,6 @@ public class ParkedCarDetailsController {
         return carDetails;
     }
 
-//    @PostMapping
-//    public Slips checkIn(@RequestBody CheckInDto )
+
 
 }
