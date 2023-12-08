@@ -1,62 +1,55 @@
 <template>
   <div id="capstone-app">
-    <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>
-      <span v-show="$route.name !== 'login'">&nbsp;|&nbsp;</span>
-
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>
-      <span v-if="$store.state.token">&nbsp;|&nbsp;</span>
-
-
-      <!-- Customer-links -->
-      <template v-if="isCustomer">
-        <router-link v-bind:to="{ name: 'request-pickup' }">Request a Pickup</router-link>&nbsp;|&nbsp;
-
-      </template>
-
-      <!--Valet and Customer -->
-      <router-link v-bind:to="{ name: 'lot-availability'}">Lot Availability</router-link>
-
-      <span>&nbsp;|&nbsp;</span>
-
-      <!-- Valet-links -->
-      <template v-if="isValet">
-        <router-link v-bind:to="{ name: 'arrive-time' }">Arrival Time</router-link>&nbsp;|&nbsp;
-        <router-link v-bind:to="{ name: 'valet-request-pickup' }">Valet Request Pickup</router-link>&nbsp;|&nbsp;
-        <router-link v-bind:to="{ name: 'check-in' }">Check In</router-link>
-        <router-link v-bind:to="{ name: 'total-cost' }">Total Cost</router-link>&nbsp;|&nbsp;
-        <span v-if="isCustomer">&nbsp;|&nbsp;</span>
-      </template>
-
-      <!-- Customer-specific link again, only if the user is not a valet -->
-      <router-link v-if="isCustomer && !isValet" v-bind:to="{ name: 'slips' }">Parking Slips</router-link>
+    <div v-if="showUserNav" id="userNav">
+      <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;
+    </div>
+    <div v-if = "showAdminNav" id="AdminNav">
+      <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'check-in' }" v-if="$store.state.token">Check In</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'valet-request-pickup' }">Valet Request Pickup</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;|&nbsp;
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
+import { Store } from 'vuex';
+
 export default {
   computed: {
     showArrivalTime() {
       return this.$route.name !== 'login';
     },
-    isCustomer(){
-      return this.$store.state.user.authorities.some(auth => auth.name === 'ROLE_USER');
+
+    showUserNav(){
+      console.log(this.$store.state)
+      if(this.$store.state){
+        if (this.$store.state.user && this.$store.state.user.authorities){
+        return this.$store.state.user.authorities[0].name === 'ROLE_USER'
+      }
+      }
+        return false;
     },
-    // isValet(){
-    //   return this.$store.state.user.authorities.some(auth => auth.name === 'ROLE_VALET');
-    // },
-    showNavBar(){
-      const noNavbarRoutes = ['login', 'register'];
-      return !noNavbarRoutes.includes(this.$route.name);
+    showAdminNav(){
+      if(this.$store.state){
+      if(this.$store.state.user && this.$store.state.user.authorities){
+        return this.$store.state.user.authorities[0].name === 'ROLE_VALET'
+      }
+    }
+      return false;
     }
   }
-};
+      
+}
+
 </script>
 <style>
-
-
 
 #nav {
   background-color: #333; 

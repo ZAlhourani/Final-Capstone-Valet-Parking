@@ -2,9 +2,7 @@
   <div id="rv">
   <div class="image-text-container">
   <div class="image-container">
-    <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '900px', height: '1000px'}">
-      </div>
-    <div class="text-container">
+  <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '900px', height: '1000px'}">
     </div>
   <div id="register" class="text-center">
     <form v-on:submit.prevent="register">
@@ -24,12 +22,13 @@
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
-      <button class="CreateAcctBttn" type="submit">Create Account</button>
-      <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
-      <div>
-      <p><router-link v-bind:to="{ name: 'registervaletview' }">New Valet? Create an account here.</router-link></p>
+      <div class="form-input-group">
+        <label for="code">Code</label>
+        <input type="password" id="code" v-model="user.code" required />
       </div>
-     </form>
+      <button type="submit">Create Valet Account</button>
+      <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      </form>
     </div>
   </div>
 </div>
@@ -45,10 +44,11 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
-        role: 'user',
+        code: '1234',
+        role: 'valet',
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
+      registrationErrorMsg: 'There were problems registering this valet user.',
     };
   },
   methods: {
@@ -78,19 +78,24 @@ export default {
     },
     clearErrors() {
       this.registrationErrors = false;
-      this.registrationErrorMsg = 'There were problems registering this user.';
+      this.registrationErrorMsg = 'There were problems registering this admin.';
     },
   },
 };
 </script>
 
-<style scoped>
-.image-text-container {
-  display: flex;
-}
+<style>
 .form-input-group {
   margin-bottom: 1rem;
   text-align: center;
+}
+#AdminNav {
+  visibility: visible;
+  color: azure; 
+  font-size: 25px;
+  border: 2px solid #BB29EB;
+  background-color: rgb(3, 3, 3);
+  
 }
 label {
   margin-right: 0.5rem;
@@ -105,12 +110,4 @@ label {
   margin-bottom: 20px;
   margin-top: 100px;
 }
- .image-container {
-  width: 700px;
-  height: 800px;
-  max-width: 100%;
-  max-height: 100%;
-} 
-
-
 </style>

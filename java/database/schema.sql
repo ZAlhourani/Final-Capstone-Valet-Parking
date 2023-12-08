@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, cars, patrons, slips, parking_lot;
+DROP TABLE IF EXISTS users, cars, patrons, slips, parking_lot, parking_spots;
 
 CREATE TABLE users (
    user_id SERIAL,
@@ -44,7 +44,7 @@ CREATE TABLE slips (
     CONSTRAINT FK_car_id FOREIGN KEY (car_id) REFERENCES cars(car_id)
 );
 
-CREATE TABLE parking_lot (
+CREATE TABLE parking_spots (
     spot_number INTEGER UNIQUE,
     car_id INTEGER,
     is_available boolean NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE parking_lot (
 
 );
 
-INSERT INTO parking_lot (spot_number, car_id, is_available)
+INSERT INTO parking_spots (spot_number, car_id, is_available)
 values (1, NULL, true),
        (2, NULL, true),
        (3, NULL, true),
