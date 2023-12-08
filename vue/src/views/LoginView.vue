@@ -73,11 +73,6 @@ export default {
 .image-text-container {
   display: flex;
 }
-
-#nav {
-  visibility: hidden;
-}
-
 .image-container {
   width: 700px;
   height: 800px;

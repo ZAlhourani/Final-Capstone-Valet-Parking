@@ -84,10 +84,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .form-input-group {
   margin-bottom: 1rem;
   text-align: center;
+}
+#AdminNav {
+  visibility: visible;
+  color: azure; 
+  font-size: 25px;
+  border: 2px solid #BB29EB;
+  background-color: rgb(3, 3, 3);
+  
 }
 label {
   margin-right: 0.5rem;
