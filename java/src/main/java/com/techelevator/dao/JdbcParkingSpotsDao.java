@@ -8,10 +8,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class JdbcParkingSpotsDao implements ParkingSpotsDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -44,6 +45,12 @@ public class JdbcParkingSpotsDao implements ParkingSpotsDao {
     }
 
     @Override
+    public List<ParkingSpots> getParkingSpotsWithCars(boolean isAvailable) {
+
+        return getParkingSpotByAvailability(!isAvailable);
+    }
+
+    @Override
     public ParkingSpots getParkingSpotBySpotNumber(int spotNumber) {
 
         ParkingSpots parkingSpot = new ParkingSpots();
@@ -63,22 +70,22 @@ public class JdbcParkingSpotsDao implements ParkingSpotsDao {
     }
 
     @Override
-    public ParkingSpots getParkingSpotByAvailability(boolean isAvailable) {
+    public List<ParkingSpots> getParkingSpotByAvailability(boolean isAvailable) {
 
-        ParkingSpots parkingSpot = new ParkingSpots();
+        List<ParkingSpots> parkingSpotList = new ArrayList<>();
 
         String sql = "select * from parking_spots where is_available = ?;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, isAvailable);
 
-            if (results.next()) {
-                parkingSpot = mapRowToParkingSpots(results);
+            while (results.next()) {
+                parkingSpotList.add(mapRowToParkingSpots(results));
             }
         }catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         }
-        return parkingSpot;
+        return parkingSpotList;
     }
 
     @Override

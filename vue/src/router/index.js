@@ -38,7 +38,7 @@ const routes = [
     name: 'check-in',
     component: CheckInForm,
     meta: {
-      requiresAuth: true // include this if the route requires authentication
+      requiresAuth: true
     }
   },
   
