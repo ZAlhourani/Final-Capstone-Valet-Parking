@@ -44,11 +44,11 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
-        code: '',
-        role: 'admin',
+        code: '1234',
+        role: 'valet',
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this admin.',
+      registrationErrorMsg: 'There were problems registering this valet user.',
     };
   },
   methods: {
