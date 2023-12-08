@@ -1,28 +1,48 @@
 <template>
   <div class="home">
-      
+       
     <h1>Servizio di Auto</h1>
-    
-    <p>You must be authenticated to see this</p>
-    
-  
   </div>
 </template>
 
 <script>
 export default {
-};
+  computed: {
+    showHomeLink() {
+      return this.$route.name !== 'login';
+    },
+    showLotAvailabilityLink() {
+      return true;
+    },
+    showSlipsLink() {
+      return this.$store.state.token;
+    },
+    showLogoutLink() {
+      return this.$store.state.token;
+    },
+  },
+  
+}; 
+
 </script>
 
-<style scoped>
+<style>
 .home {
   height: 100vh;
+  width: 100vw;
   background: #0a0a0a; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+#userNav {
+  visibility: visible;
+  color: azure; 
+  font-size: 25px;
+  border: 2px solid #BB29EB;
+  background-color: rgb(3, 3, 3);
 }
 
 h1 {
