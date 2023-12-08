@@ -37,19 +37,23 @@ private final CarsDao carsDao;
          Cars newCar = new Cars();
          Patrons newPatron = new Patrons();
 
+         newPatron.setName(checkInDto.getName());
+         newPatron.setPhoneNumber(checkInDto.getPhoneNumber());
+         newPatron = patronsDao.createNewPatron(newPatron);
+
          newCar.setMake(checkInDto.getMake());
          newCar.setModel(checkInDto.getModel());
          newCar.setColor(checkInDto.getColor());
          newCar.setLicensePlate(checkInDto.getLicensePlate());
          newCar.setVinNumber(checkInDto.getVinNumber());
+         newCar.setPatronId(newPatron);
 
-         carsDao.createNewCar(newCar);
+         newCar = carsDao.createNewCar(newCar);
 
-         newPatron.setName(checkInDto.getName());
-         newPatron.setPhoneNumber(checkInDto.getPhoneNumber());
-         patronsDao.createNewPatron(newPatron);
 
          newSlip.setArrivalTime(checkInDto.getArrivalTime());
+         newSlip.setPatronId(newPatron);
+         newSlip.setCarId(newCar);
          slipsDao.createNewSlip(newSlip);
          return newSlip;
      }

@@ -48,9 +48,7 @@
   </template>
   
   <script>
-  
-import CarService from '../services/CarsService'; 
-import PatronService from '../services/PatronsService'; 
+import CheckInDtoService from '../services/CheckInDtoService';
 
 export default {
   data() {
@@ -66,55 +64,58 @@ export default {
         name: '',
         phoneNumber: ''
       },
-      arrivalTime: '' 
+      arrivalTime: ''
     };
   },
   methods: {
     submitForm() {
-      if (!this.validateForm()) return;
+      if (!this.validateForm()) {
+        alert('Please fill all the fields correctly.');
+        return;
+      }
 
-      const newCar = {
-        make: this.car.make,
-        model: this.car.model,
-        color: this.car.color,
-        licensePlate: this.car.licensePlate,
-        vinNumber: this.car.vinNumber
-      };
-    
-      const newPatron = {
-        name: this.patron.name,
-        phoneNumber: this.patron.phoneNumber,
-        arrivalTime: this.arrivalTime 
+      const carCheckInData = {
+        ...this.car,
+        ...this.patron,
+        arrivalTime: this.arrivalTime
       };
 
-      CarService.createNewCar(newCar)
-        .then(carResponse => {
-          console.log('Car created successfully', carResponse);
-          return PatronService.createNewPatron(newPatron);
-        })
-        .then(patronResponse => {
-          console.log('Patron created successfully', patronResponse);
-
-          
+      CheckInDtoService.checkIn(carCheckInData)
+        .then(response => {
+          console.log('Check-in successful', response);
+          alert('Check-in successful');
+          // Additional logic after success, e.g., redirecting
         })
         .catch(error => {
           console.error('An error occurred during form submission', error);
+          alert('An error occurred during form submission');
         });
     },
+      clearForm() {
+        this.car = {
+          make: '',
+          model: '',
+          color: '',
+          licensePlate: '',
+          vinNumber: '',
+       };
+       this.patron = {
+      name: '',
+      phoneNumber: ''
+      };
+      this.arrivalTime = '';
+     },
     validateForm() {
-     let isValid = true;
-     let errorMessage = '';
-
-     if(!this.car.make) {
-      errorMessage += 'Car was not read right'
-     }
-    },
-    clearForm() {
-      
+      return this.car.make && this.car.model && this.car.color && 
+             this.car.licensePlate && this.car.vinNumber &&
+             this.patron.name && this.patron.phoneNumber && 
+             this.arrivalTime;
     }
   }
 };
 </script>
+
+
 
   
   <style>
