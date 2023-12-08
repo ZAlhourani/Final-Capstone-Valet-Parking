@@ -23,7 +23,7 @@ import RegisterView from '../views/RegisterView.vue';
  * If they have (or don't need to) they're allowed to go about their way.
  */
 const routes = [
-
+ 
   {
     path: '/valet/request-pickup',
     name: 'valet-request-pickup',

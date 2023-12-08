@@ -7,6 +7,7 @@
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>
       <span v-if="$store.state.token">&nbsp;|&nbsp;</span>
 
+
       <!-- Customer-links -->
       <template v-if="isCustomer">
         <router-link v-bind:to="{ name: 'request-pickup' }">Request a Pickup</router-link>&nbsp;|&nbsp;
@@ -15,6 +16,7 @@
 
       <!--Valet and Customer -->
       <router-link v-bind:to="{ name: 'lot-availability'}">Lot Availability</router-link>
+
       <span>&nbsp;|&nbsp;</span>
 
       <!-- Valet-links -->
@@ -42,9 +44,9 @@ export default {
     isCustomer(){
       return this.$store.state.user.authorities.some(auth => auth.name === 'ROLE_USER');
     },
-    isValet(){
-      return this.$store.state.userRole === 'valet';
-    },
+    // isValet(){
+    //   return this.$store.state.user.authorities.some(auth => auth.name === 'ROLE_VALET');
+    // },
     showNavBar(){
       const noNavbarRoutes = ['login', 'register'];
       return !noNavbarRoutes.includes(this.$route.name);
