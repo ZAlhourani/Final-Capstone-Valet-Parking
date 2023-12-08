@@ -143,7 +143,9 @@ public class JdbcSlipsDao implements SlipsDao {
         slip.setCarId(carId);
 
         slip.setArrivalTime(results.getTimestamp("arrival_time").toLocalDateTime());
-        slip.setDepartureTime(results.getTimestamp("departure_time").toLocalDateTime());
+        if (results.getTimestamp("departure_time") != null) {
+            slip.setDepartureTime(results.getTimestamp("departure_time").toLocalDateTime());
+        }
         slip.setHourlyPrice(results.getDouble("hourly_price"));
         slip.setTotal(results.getDouble("total"));
 
