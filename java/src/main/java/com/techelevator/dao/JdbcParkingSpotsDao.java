@@ -94,8 +94,8 @@ public class JdbcParkingSpotsDao implements ParkingSpotsDao {
         String sql = "update parking_spots set car_id = ?, is_available = ? where spot_number = ?;";
 
         try {
-            int numberOfRowsAffected = jdbcTemplate.update(sql, parkingSpot.getCarId(),
-                    parkingSpot.isAvailable());
+            int numberOfRowsAffected = jdbcTemplate.update(sql, parkingSpot.getCarId().getCarId(),
+                    parkingSpot.isAvailable(), parkingSpot.getSpotNumber());
             if (numberOfRowsAffected == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
             }
