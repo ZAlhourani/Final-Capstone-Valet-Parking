@@ -7,17 +7,18 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class JdbcPatronsDao implements PatronsDao{
 
     private final JdbcTemplate jdbcTemplate;
 
     private final UserDao userDao;
 
-    public JdbcPatronsDao(JdbcTemplate jdbcTemplate, PatronsDao patronsDao, UserDao userDao) {
+    public JdbcPatronsDao(JdbcTemplate jdbcTemplate, UserDao userDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.userDao = userDao;
     }

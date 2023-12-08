@@ -8,6 +8,7 @@ public interface SlipsDao {
 
     List<Slips> getAllSlips();
     Slips getSlipBySlipNumber(int slipNumber);
+    Slips getSlipByCarId(int carId);
     Slips createNewSlip(Slips newSlip);
     Slips updateSlip(Slips slip);
 }
