@@ -11,6 +11,7 @@ public class CheckInDto {
     private String name;
     private String phoneNumber;
     private LocalDateTime arrivalTime;
+    private int spotNumber;
 
     public String getMake() {
         return make;
@@ -74,5 +75,13 @@ public class CheckInDto {
 
     public void setArrivalTime(LocalDateTime arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+    public int getSpotNumber() {
+        return spotNumber;
+    }
+
+    public void setSpotNumber(int spotNumber) {
+        this.spotNumber = spotNumber;
     }
 }
