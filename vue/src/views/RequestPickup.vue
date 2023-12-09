@@ -16,6 +16,8 @@
         </div>
   
         <button type="submit">Request Pickup</button>
+        <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">View Parking Slip</router-link>&nbsp;
+
       </form>
     </div>
   </template>
@@ -43,6 +45,7 @@
   
   <style scoped>
   .request-pickup {
+    
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
