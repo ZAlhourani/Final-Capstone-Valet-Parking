@@ -29,18 +29,24 @@
   </template>
   
   <script>
+  import SlipsService from '../services/SlipsService';
+
   export default {
     data() {
       return {
-        slips: [
-        
-    ]
+        slips: []
       };
+    },
+    created() {
+      this.slips = SlipsService.getAllSlipsList();
     },
     methods: {
       formatTime(time) {
         if (!time) return 'N/A';
       }
+    },
+    computed: {
+
     }
   };
   </script>

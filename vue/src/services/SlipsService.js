@@ -3,7 +3,6 @@ import axios from "axios";
 export default {
 
     getAllSlipsList(){
-
         return axios.get('/slips');
     },
 
