@@ -3,7 +3,7 @@ package com.techelevator.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkingSpots {
+public class  ParkingSpots {
     private int spotNumber;
     private Cars carId;
     private boolean isAvailable;

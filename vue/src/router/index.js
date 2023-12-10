@@ -13,7 +13,8 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
-import RegisterValetView from '../views/RegisterValetView.vue'
+import RegisterValetView from '../views/RegisterValetView.vue';
+import ParkedCarsView from '../views/ParkedCarsView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -25,7 +26,19 @@ import RegisterValetView from '../views/RegisterValetView.vue'
  */
 const routes = [
 
+<<<<<<< HEAD
 
+=======
+  {
+    path: '/parked-cars',
+    name: 'ParkedCars',
+    component: ParkedCarsView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+ 
+>>>>>>> e12c568bfcf8926305b78f875c7d07c7194d3ad7
   {
     path: '/valet/request-pickup',
     name: 'valet-request-pickup',
