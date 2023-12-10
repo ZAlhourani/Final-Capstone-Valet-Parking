@@ -20,7 +20,7 @@
             <td>{{ slip.car_id }}</td>
             <td>{{ formatTime(slip.arrival_time) }}</td>
             <td>{{ formatTime(slip.departure_time) }}</td>
-            <td>{{ slip.hourly_price }}</td>
+            <td>{{ slip.hourly_price = 5.00 }}</td>
             <td>{{ slip.total }}</td>
           </tr>
         </tbody>
@@ -29,6 +29,8 @@
   </template>
   
   <script>
+  import SlipsService from '../services/SlipsService';
+
   export default {
     data() {
       return {
@@ -40,7 +42,17 @@
     methods: {
       formatTime(time) {
         if (!time) return 'N/A';
-      }
+      },
+
+    total() {
+    const slipInfo = SlipsService.getSlipBySlipNumber();
+
+    const parkingDurationInHours = (this.departure_time - this.arrival_time) / (1000 * 60 * 60);
+
+    const parkingTotal = parkingDurationInHours * this.hourly_price;
+
+    return parkingTotal;
+    }
     }
   };
   </script>
