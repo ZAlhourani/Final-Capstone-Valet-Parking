@@ -40,7 +40,7 @@ export default {
     showAdminNav(){
       if(this.$store.state){
       if(this.$store.state.user && this.$store.state.token !== ""){
-        return this.$store.state.user.authorities[0].name === 'ROLE_VALET'
+        return this.$store.state.user.authorities[0].name === 'ROLE_ADMIN'
       }
     }
       return false;
@@ -72,5 +72,3 @@ export default {
 }
 
 </style>
-
-
