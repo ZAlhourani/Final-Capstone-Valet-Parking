@@ -9,7 +9,7 @@ public class Slips {
     private Cars carId;
     private LocalDateTime arrivalTime;
     private LocalDateTime departureTime;
-    private double hourlyPrice;
+    private double hourlyPrice = 5.00;
     private double total;
 
     public int getSlipNumber() {

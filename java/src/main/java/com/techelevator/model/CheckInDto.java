@@ -3,6 +3,8 @@ package com.techelevator.model;
 import java.time.LocalDateTime;
 
 public class CheckInDto {
+
+    private int patronId;
     private String make;
     private String model;
     private String color;
@@ -12,6 +14,14 @@ public class CheckInDto {
     private String phoneNumber;
     private LocalDateTime arrivalTime;
     private int spotNumber;
+
+    public int getPatronId() {
+        return patronId;
+    }
+
+    public void setPatronId(int patronId) {
+        this.patronId = patronId;
+    }
 
     public String getMake() {
         return make;

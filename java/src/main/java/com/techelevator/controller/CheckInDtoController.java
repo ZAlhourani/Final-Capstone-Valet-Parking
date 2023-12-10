@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+
 @RestController
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
@@ -31,11 +33,15 @@ public class CheckInDtoController {
     @PreAuthorize("hasRole('ROLE_VALET')")
     @PostMapping("/check-in")
     public Slips checkIn(@RequestBody CheckInDto checkInDto){
+
         Slips newSlip = new Slips();
         Cars newCar = new Cars();
         Patrons newPatron = new Patrons();
         ParkingSpots newParkingSpot = parkingSpotsDao.getParkingSpotBySpotNumber(checkInDto.getSpotNumber());
 
+         newPatron.setPatronId(checkInDto.getPatronId());
+         newPatron.setName(checkInDto.getName());
+         newPatron.setPhoneNumber(checkInDto.getPhoneNumber());
         newPatron.setName(checkInDto.getName());
         newPatron.setPhoneNumber(checkInDto.getPhoneNumber());
 
@@ -70,4 +76,11 @@ public class CheckInDtoController {
         newSlip = slipsDao.createNewSlip(newSlip);
         return newSlip;
     }
+         newSlip.setArrivalTime(checkInDto.getArrivalTime());
+         newSlip.setDepartureTime(LocalDateTime.now());
+         newSlip.setPatronId(newPatron);
+         newSlip.setCarId(newCar);
+         newSlip = slipsDao.createNewSlip(newSlip);
+         return newSlip;
+     }
 }
