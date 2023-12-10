@@ -26,9 +26,6 @@ import ParkedCarsView from '../views/ParkedCarsView.vue';
  */
 const routes = [
 
-<<<<<<< HEAD
-
-=======
   {
     path: '/parked-cars',
     name: 'ParkedCars',
@@ -38,7 +35,6 @@ const routes = [
     }
   },
  
->>>>>>> e12c568bfcf8926305b78f875c7d07c7194d3ad7
   {
     path: '/valet/request-pickup',
     name: 'valet-request-pickup',
