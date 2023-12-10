@@ -1,10 +1,7 @@
 package com.techelevator.model;
 
-import java.time.LocalDateTime;
+public class CarCheckInDto {
 
-public class CheckInDto {
-
-    private int patronId;
     private String make;
     private String model;
     private String color;
@@ -12,16 +9,7 @@ public class CheckInDto {
     private String vinNumber;
     private String name;
     private String phoneNumber;
-    private LocalDateTime arrivalTime;
-    private int spotNumber;
 
-    public int getPatronId() {
-        return patronId;
-    }
-
-    public void setPatronId(int patronId) {
-        this.patronId = patronId;
-    }
 
     public String getMake() {
         return make;
@@ -77,21 +65,5 @@ public class CheckInDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public LocalDateTime getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(LocalDateTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-
-    public int getSpotNumber() {
-        return spotNumber;
-    }
-
-    public void setSpotNumber(int spotNumber) {
-        this.spotNumber = spotNumber;
     }
 }

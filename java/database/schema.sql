@@ -37,7 +37,7 @@ CREATE TABLE slips (
     car_id INTEGER,
     arrival_time timestamp NOT NULL,
     departure_time timestamp,
-    hourly_price decimal(5,2) DEFAULT 5,
+    hourly_price decimal(5,2) DEFAULT 5.00,
     total decimal(5,2),
     CONSTRAINT PK_slip PRIMARY KEY (slip_number),
     CONSTRAINT FK_patron_id FOREIGN KEY (patron_id) REFERENCES patrons(patron_id),

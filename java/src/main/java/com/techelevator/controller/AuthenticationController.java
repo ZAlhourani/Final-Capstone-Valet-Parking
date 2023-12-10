@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
+import com.techelevator.dao.PatronsDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.*;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +29,7 @@ public class AuthenticationController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
+    private PatronsDao patronsDao;
 
     public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao) {
         this.tokenProvider = tokenProvider;
@@ -69,6 +71,14 @@ public class AuthenticationController {
             }
 
             User user = userDao.createUser(newUser);
+//            Patrons newPatron = new Patrons();
+//            newPatron.setName(newUser.getName());
+//            newPatron.setPhoneNumber(newUser.getPhoneNumber());
+
+//            newPatron.setUserId(user);
+
+//            patronsDao.createNewPatron(newPatron);
+
             if (user == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User registration failed.");
             }
