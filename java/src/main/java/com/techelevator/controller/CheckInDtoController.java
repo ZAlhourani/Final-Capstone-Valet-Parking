@@ -39,9 +39,7 @@ public class CheckInDtoController {
         Patrons newPatron = new Patrons();
         ParkingSpots newParkingSpot = parkingSpotsDao.getParkingSpotBySpotNumber(checkInDto.getSpotNumber());
 
-         newPatron.setPatronId(checkInDto.getPatronId());
-         newPatron.setName(checkInDto.getName());
-         newPatron.setPhoneNumber(checkInDto.getPhoneNumber());
+        newPatron.setPatronId(checkInDto.getPatronId());
         newPatron.setName(checkInDto.getName());
         newPatron.setPhoneNumber(checkInDto.getPhoneNumber());
 
@@ -71,16 +69,25 @@ public class CheckInDtoController {
         }
 
         newSlip.setArrivalTime(checkInDto.getArrivalTime());
+        newSlip.setDepartureTime(LocalDateTime.now());
         newSlip.setPatronId(newPatron);
         newSlip.setCarId(newCar);
         newSlip = slipsDao.createNewSlip(newSlip);
         return newSlip;
     }
-         newSlip.setArrivalTime(checkInDto.getArrivalTime());
-         newSlip.setDepartureTime(LocalDateTime.now());
-         newSlip.setPatronId(newPatron);
-         newSlip.setCarId(newCar);
-         newSlip = slipsDao.createNewSlip(newSlip);
-         return newSlip;
-     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
