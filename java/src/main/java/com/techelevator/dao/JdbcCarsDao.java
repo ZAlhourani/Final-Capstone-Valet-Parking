@@ -23,27 +23,47 @@ public class JdbcCarsDao implements CarsDao {
         this.jdbcTemplate = jdbcTemplate;
         this.patronsDao = patronsDao;
     }
-
     @Override
     public List<Cars> getAllCars() {
-
         List<Cars> allCars = new ArrayList<>();
-
-        String sql = "select * from cars;";
+        String sql = "SELECT cars.*, patrons.name AS ownerName, patrons.phone_number AS ownerContact " +
+                "FROM cars JOIN patrons ON cars.patron_id = patrons.patron_id;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
                 Cars car = mapRowToCars(results);
+                car.setOwnerName(results.getString("ownerName"));
+                car.setOwnerContact(results.getString("ownerContact"));
                 allCars.add(car);
             }
-
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         }
         return allCars;
-
     }
+
+
+//    @Override
+//    public List<Cars> getAllCars() {
+//
+//        List<Cars> allCars = new ArrayList<>();
+//
+//        String sql = "select * from cars;";
+//
+//        try {
+//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+//            while (results.next()) {
+//                Cars car = mapRowToCars(results);
+//                allCars.add(car);
+//            }
+//
+//        } catch (CannotGetJdbcConnectionException e) {
+//            throw new DaoException("Unable to connect to server or database", e);
+//        }
+//        return allCars;
+//
+//    }
 
     @Override
     public Cars getCarByCarId(int carId) {
@@ -132,8 +152,11 @@ public class JdbcCarsDao implements CarsDao {
         car.setColor(results.getString("color"));
         car.setLicensePlate(results.getString("license_plate"));
         car.setVinNumber(results.getString("vin_number"));
+        car.setOwnerName(results.getString("ownerName"));
+        car.setOwnerContact(results.getString("ownerContact"));
 
         int carPatronId = results.getInt("patron_id");
+
         Patrons patronId = patronsDao.getPatronById(carPatronId);
         car.setPatronId(patronId);
 

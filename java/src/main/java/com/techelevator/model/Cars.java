@@ -13,8 +13,25 @@ public class Cars {
     private String vinNumber;
     private Patrons patronId;
 
+    /* added */ private String ownerName;
+    /* added */ private String ownerContact;
 
 
+    /* added */ public String getOwnerName() {
+        return ownerName;
+    }
+
+    /* added */ public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    /* added */ public String getOwnerContact() {
+        return ownerContact;
+    }
+
+    /* added */ public void setOwnerContact(String ownerContact) {
+        this.ownerContact = ownerContact;
+    }
     public int getCarId() {
         return carId;
     }

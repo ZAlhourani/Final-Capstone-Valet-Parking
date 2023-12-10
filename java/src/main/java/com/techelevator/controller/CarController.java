@@ -7,6 +7,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
@@ -43,4 +45,10 @@ public class CarController {
 
         return carsDao.updateCar(updatedCar);
     }
+    @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/cars")
+    public List<Cars> getAllCars() {
+        return carsDao.getAllCars();
+    }
 }
+
