@@ -13,7 +13,7 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
-import RegisterValetView from '../views/RegisterValetView.vue'
+import RegisterValetView from '../views/RegisterValetView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -58,7 +58,6 @@ const routes = [
       requiresAuth: true 
     }
   },
-  
   {
     path:'/request-pickup',
     name: 'request-pickup',
@@ -67,7 +66,6 @@ const routes = [
       requiresAuth: true
     } 
   },
-
   {
     path: '/total-cost',
     name: 'total-cost',
@@ -127,7 +125,7 @@ const routes = [
     component: RegisterValetView,
     meta: {
       requiresAuth: false
-    }
+    },
   },
 
 ];
