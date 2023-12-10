@@ -93,7 +93,7 @@ public class JdbcSlipsDao implements SlipsDao {
 
         try {
             int slipNumber = jdbcTemplate.queryForObject(sql, Integer.class,
-                    newSlip.getPatronId(), newSlip.getCarId(), newSlip.getArrivalTime(),
+                    newSlip.getPatronId().getPatronId(), newSlip.getCarId().getCarId(), newSlip.getArrivalTime(),
                     newSlip.getDepartureTime(), newSlip.getHourlyPrice(), newSlip.getTotal());
 
             return getSlipBySlipNumber(slipNumber);
@@ -143,7 +143,9 @@ public class JdbcSlipsDao implements SlipsDao {
         slip.setCarId(carId);
 
         slip.setArrivalTime(results.getTimestamp("arrival_time").toLocalDateTime());
-        slip.setDepartureTime(results.getTimestamp("departure_time").toLocalDateTime());
+        if (results.getTimestamp("departure_time") != null) {
+            slip.setDepartureTime(results.getTimestamp("departure_time").toLocalDateTime());
+        }
         slip.setHourlyPrice(results.getDouble("hourly_price"));
         slip.setTotal(results.getDouble("total"));
 

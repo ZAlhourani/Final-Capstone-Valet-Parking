@@ -88,7 +88,7 @@ public class JdbcCarsDao implements CarsDao {
         try {
             int carId = jdbcTemplate.queryForObject(sql, Integer.class,
                     newCar.getMake(), newCar.getModel(), newCar.getColor(),
-                    newCar.getLicensePlate(), newCar.getVinNumber(), newCar.getPatronId());
+                    newCar.getLicensePlate(), newCar.getVinNumber(), newCar.getPatronId().getPatronId());
 
             return getCarByCarId(carId);
 

@@ -4,11 +4,9 @@ import com.techelevator.dao.CarsDao;
 import com.techelevator.dao.PatronsDao;
 import com.techelevator.dao.SlipsDao;
 import com.techelevator.model.ParkedCarDetailsDto;
+import com.techelevator.model.Slips;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -42,5 +40,7 @@ public class ParkedCarDetailsController {
 
         return carDetails;
     }
+
+
 
 }
