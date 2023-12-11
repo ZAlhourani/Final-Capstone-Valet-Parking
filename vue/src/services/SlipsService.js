@@ -6,6 +6,10 @@ export default {
         return axios.get('/slips');
     },
 
+    getSlipByPatronId(patronId) {
+        return axios.get(`/slips/${patronId}`);
+    },
+
     getSlipBySlipNumber(slipNumber) {
         return axios.get(`/slips/${slipNumber}`);
     },

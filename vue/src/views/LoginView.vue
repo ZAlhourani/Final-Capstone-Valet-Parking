@@ -16,7 +16,7 @@
       </div>
       <div class="form-input-group">
         <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
+        <input type="text" id="username" v-model="user.username" required autofocus autocomplete="off" />
       </div>
       <div class="form-input-group">
         <label for="password">Password</label>
@@ -86,12 +86,12 @@ export default {
 #login{
   font-size: 30px;
   font-style: italic;
-  /* padding-bottom: 300px; */
   margin-top: 20px;
   color: rgb(130, 2, 251);
   text-shadow: 0 0 10px rgba(130, 2, 251, 1);
   margin-top: 100px; 
 }
+
 .form-input-group {
   margin-bottom: 1rem;
   text-align: center;
