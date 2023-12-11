@@ -1,9 +1,6 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.CarsDao;
-import com.techelevator.dao.ParkingSpotsDao;
-import com.techelevator.dao.PatronsDao;
-import com.techelevator.dao.SlipsDao;
+import com.techelevator.dao.*;
 import com.techelevator.model.ParkedCarsInfoDto;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,29 +14,22 @@ import java.util.List;
 
 public class ParkedCarsInfoDtoController {
 
-    private final CarsDao carsDao;
-    private final PatronsDao patronsDao;
-    private final ParkingSpotsDao parkingSpotsDao;
-    private final SlipsDao slipsDao;
 
-    public ParkedCarsInfoDtoController(CarsDao carsDao, PatronsDao patronsDao, ParkingSpotsDao parkingSpotsDao, SlipsDao slipsDao) {
-        this.carsDao = carsDao;
-        this.patronsDao = patronsDao;
-        this.parkingSpotsDao = parkingSpotsDao;
-        this.slipsDao = slipsDao;
+   private final ParkedCarsInfoDtoDao parkedCarsInfoDtoDao;
+
+    public ParkedCarsInfoDtoController(ParkedCarsInfoDtoDao parkedCarsInfoDtoDao) {
+        this.parkedCarsInfoDtoDao = parkedCarsInfoDtoDao;
     }
 
-//    @PreAuthorize("hasRole('ROLE_VALET')")
-//    @GetMapping("/car-info")
-//    public List<ParkedCarsInfoDto> getParkedCarsInfo(@RequestBody ParkedCarsInfoDto parkedCarsInfoDto){
-//
-//        List<ParkedCarsInfoDto> parkedCarsInfoDtoList = new ArrayList<>();
-//
-//        parkedCarsInfoDtoList.add(parkedCarsInfoDto);
-//
-//        return parkedCarsInfoDtoList;
-//
-//    }
+    @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/car-info")
+    public List<ParkedCarsInfoDto> getParkedCarsInfo(){
+
+        List<ParkedCarsInfoDto> parkedCarsInfoDtoList = new ArrayList<>();
+
+        return parkedCarsInfoDtoDao.getParkedCarsInfo();
+
+    }
 
 //        ParkedCarsInfoDto parkedCarInfo = new ParkedCarsInfoDto();
 //
