@@ -38,6 +38,20 @@ public class PatronController {
             return result;
         }
     }
+
+    @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/patrons/{phoneNumber}")
+    public Patrons getPatronByPhoneNumber (@PathVariable String phoneNumber) {
+
+        Patrons result = patronsDao.getPatronByPhoneNumber(phoneNumber);
+        if (result == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No patron with that phone number.");
+        } else {
+            return result;
+        }
+    }
+
+
     @PreAuthorize("hasRole('ROLE_VALET')")
     @PostMapping("/patrons")
     public Patrons createNewPatron (@RequestBody Patrons newPatron) {

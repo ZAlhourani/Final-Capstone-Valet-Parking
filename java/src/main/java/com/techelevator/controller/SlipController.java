@@ -39,6 +39,18 @@ public class SlipController {
     }
 
     @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/slips/{patronId}")
+    public Slips getSlipsByPatronId (@PathVariable int patronId){
+        Slips result = slipsDao.getSlipByPatronId(patronId);
+
+        if (result == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
+        } else {
+            return result;
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/slips/{carId}")
     public Slips getSlipByCarId (@PathVariable int carId){
         Slips result = slipsDao.getSlipByCarId(carId);
