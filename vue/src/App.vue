@@ -14,6 +14,7 @@
       <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'ParkedCars' }">Parking Lot</router-link> &nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;
     </div>
     <router-view />
   </div>
@@ -31,7 +32,7 @@ export default {
     showUserNav(){
       console.log(this.$store.state)
       if(this.$store.state){
-        if (this.$store.state.user && this.$store.state.user.authorities){
+        if (this.$store.state.user && this.$store.state.token !== ""){
         return this.$store.state.user.authorities[0].name === 'ROLE_USER'
       }
       }
@@ -39,7 +40,7 @@ export default {
     },
     showAdminNav(){
       if(this.$store.state){
-      if(this.$store.state.user && this.$store.state.user.authorities){
+      if(this.$store.state.user && this.$store.state.token !== ""){
         return this.$store.state.user.authorities[0].name === 'ROLE_VALET'
       }
     }
@@ -72,5 +73,3 @@ export default {
 }
 
 </style>
-
-

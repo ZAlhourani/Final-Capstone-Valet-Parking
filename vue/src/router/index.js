@@ -68,7 +68,6 @@ const routes = [
       requiresAuth: true 
     }
   },
-  
   {
     path:'/request-pickup',
     name: 'request-pickup',
@@ -77,7 +76,6 @@ const routes = [
       requiresAuth: true
     } 
   },
-
   {
     path: '/total-cost',
     name: 'total-cost',
@@ -137,7 +135,7 @@ const routes = [
     component: RegisterValetView,
     meta: {
       requiresAuth: false
-    }
+    },
   },
 
 ];
