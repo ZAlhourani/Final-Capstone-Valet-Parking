@@ -27,18 +27,18 @@
     </table>
   </div>
   <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>
-
 </template>
 
 <script>
 import SlipsService from '../services/SlipsService';
+import PatronsService from '../services/PatronsService.js'
 
 export default {
   data() {
     return {
       slips: [
-      
-  ]
+
+      ]
     };
   },
   methods: {
@@ -46,15 +46,20 @@ export default {
       if (!time) return 'N/A';
     },
 
-  total() {
-  const slipInfo = SlipsService.getSlipBySlipNumber();
+    total() {
+      const slipInfo = SlipsService.getSlipBySlipNumber();
 
-  const parkingDurationInHours = (this.departure_time - this.arrival_time) / (1000 * 60 * 60);
+      const parkingDurationInHours = (this.departure_time - this.arrival_time) / (1000 * 60 * 60);
 
-  const parkingTotal = parkingDurationInHours * this.hourly_price;
+      const parkingTotal = parkingDurationInHours * this.hourly_price;
 
-  return parkingTotal;
-  }
+      return parkingTotal;
+    },
+    created() {
+      let patronID = -1;
+      PatronsService.getPatronIdByUserId(this.$store.state.user.id)
+      .then
+    }
   }
 };
 </script>
@@ -62,7 +67,7 @@ export default {
 <style>
 h1 {
   font-size: 20px;
-  text-align:center;
+  text-align: center;
 }
 
 table {
@@ -70,7 +75,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;

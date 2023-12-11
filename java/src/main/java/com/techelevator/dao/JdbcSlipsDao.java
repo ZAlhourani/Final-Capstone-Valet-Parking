@@ -67,17 +67,17 @@ public class JdbcSlipsDao implements SlipsDao {
     }
 
     @Override
-    public Slips getSlipByPatronId(int patronId) {
+    public List<Slips> getSlipByPatronId(int patronId) {
 
-        Slips slip = new Slips();
+        List<Slips> slip = new ArrayList<Slips>();
 
         String sql = "select * from slips where patron_id =?;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patronId);
 
-            if (results.next()) {
-                slip = mapRowToSlips(results);
+            while (results.next()) {
+                slip.add( mapRowToSlips(results)) ;
             }
         }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server or database", e);
