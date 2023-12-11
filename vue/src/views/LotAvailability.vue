@@ -1,124 +1,138 @@
 <template>
   <div class="parking-lot-container">
     <h2>Parking Lot Availability</h2>
-
     <div v-if="isLotFull" class="lot-full-warning">
       <p><strong>Warning:</strong> Lot is Full!</p>
     </div>
-
     <div class="parking-lot">
-      <div v-for="row in formattedParkingSpots" :key="row[0].id" class="parking-row">
-        <div v-for="spot in row" :key="spot.id" class="parking-spot" :class="spotClass(spot)" @mouseover="showDetails(spot)" @mouseleave="hideDetails">
-          <i :class="iconClass(spot)"></i>
-          <div v-show="selectedSpot.id === spot.id" class="details">
-            <p>Location: {{ spot.location }}</p>
-          </div>
+      <div v-for="row in formattedParkingSpots" :key="row[0].spotNumber" class="parking-row">
+        <div v-for="spot in row" :key="spot.spotNumber" class="parking-spot" :class="{ 'available': spot.isAvailable, 'occupied': !spot.isAvailable }">
+          <p>Spot {{ spot.spotNumber }}</p>
+          <p v-if="!spot.isAvailable">Occupied</p>
+          <p v-else>Available</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-
-
 <script>
+import ParkingSpotService from '../services/ParkingSpotsService';
+
 export default {
   data() {
     return {
-      parkingSpots: [
-      { id: 1, isAvailable: true,  location: '1' },
-      { id: 2, isAvailable: true,  location: '2' },
-      { id: 3, isAvailable: true,  location: '3' },
-      { id: 4, isAvailable: true,  location: '4' },
-      { id: 5, isAvailable: true,  location: '5' },
-      { id: 6, isAvailable: true,  location: '6' },
-      { id: 7, isAvailable: true,  location: '7' },
-      { id: 8, isAvailable: true,  location: '8' },
-      { id: 9, isAvailable: true,  location: '9' },
-      { id: 10, isAvailable: true, location: '10'},
-      ],
-      selectedSpot: {}
+      parkingSpots: []
     };
   },
   computed: {
     formattedParkingSpots() {
-      const spotsPerRow = 5;
+    const spotsPerRow = 5;
     let rows = [];
-    for (let i = 0; i < this.parkingSpots.length; i += spotsPerRow) {
-      let row = this.parkingSpots.slice(i, i + spotsPerRow);
+    let sortedSpots = [...this.parkingSpots].sort((a, b) => a.spotNumber - b.spotNumber);
+    for (let i = 0; i < sortedSpots.length; i += spotsPerRow) {
+      let row = sortedSpots.slice(i, i + spotsPerRow);
       rows.push(row);
     }
     return rows;
   },
-  isLotFull(){
-    return this.parkingSpots.every(spot => !spot.isAvailable);
-  }
-},
-
-  methods: {
-    showDetails(spot) {
-      if (spot.isAvailable) {
-        this.selectedSpot = spot;
+    isLotFull() {
+      if (this.parkingSpots.length === 0) {
+        return false; 
       }
-    },
-    hideDetails() {
-      this.selectedSpot = {};
-    },
-    spotClass(spot) {
-      return {
-        'available': spot.isAvailable,
-      };
-    },
-    iconClass(spot) {
+      this.parkingSpots.forEach((spot, index) => {
+        console.log(`Spot ${index + 1}: Available - ${spot.isAvailable}`);
+      });
+
+      const isFull = !this.parkingSpots.some(spot => spot.isAvailable);
+      console.log('Computed lot full status:', isFull);
+      return isFull;
     }
+  },
+  methods: {
+    fetchParkingSpots() {
+      ParkingSpotService.getAllParkingSpots()
+        .then(response => {
+          console.log('Parking spots data:', response.data);
+
+          this.parkingSpots = response.data.map(spot => ({
+            spotNumber: spot.spotNumber, // Make sure this matches the key in the response
+            isAvailable: spot.available // Make sure this matches the key in the response and is a boolean
+          }));
+
+          this.parkingSpots.forEach((spot, index) => {
+            console.log(`Spot ${index + 1}: Available - ${spot.isAvailable}`);
+          });
+
+          console.log('Computed lot full status:', this.isLotFull);
+        })
+        .catch(error => {
+          console.error('Error fetching parking spots:', error);
+        });
+    }
+  },
+  created() {
+    this.fetchParkingSpots();
   }
 };
 </script>
 
-<style>
+<style scoped>
+.parking-lot-container {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.lot-full-warning {
+  background-color: #ffcccc;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
 .parking-lot {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .parking-row {
   display: flex;
   justify-content: center;
-  margin-bottom: 15px; 
+  flex-basis: 100%;
+  margin-bottom: 10px;
 }
-
-
 
 .parking-spot {
   border: 1px solid #ddd;
-  padding: 20px; 
-  margin: 10px;
+  padding: 20px;
+  margin: 5px;
   text-align: center;
-  cursor: pointer;
-  flex-grow: 1;
-  width: 200px; 
-  height: 200px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 5px;
 }
 
-.available {
-  background-color: #dff0d8; 
+.parking-spot.available {
+  background-color: #ccffcc;
 }
 
-.details {
-  display: none;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  padding: 5px;
-  position: absolute;
-  z-index: 10;
+.parking-spot.occupied {
+  background-color: #ffcccc;
 }
 
-.parking-spot:hover .details {
-  display: block;
+.parking-spot p {
+  margin: 5px 0;
+  font-weight: bold;
+  color: #333;
 }
 </style>
