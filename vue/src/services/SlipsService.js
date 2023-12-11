@@ -3,8 +3,11 @@ import axios from "axios";
 export default {
 
     getAllSlipsList(){
-
         return axios.get('/slips');
+    },
+
+    getSlipByPatronId(patronId) {
+        return axios.get(`/slips/${patronId}`);
     },
 
     getSlipBySlipNumber(slipNumber) {
