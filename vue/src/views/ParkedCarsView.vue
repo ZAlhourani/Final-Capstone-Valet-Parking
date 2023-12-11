@@ -17,10 +17,10 @@
             <span>{{ car.make }} - {{ car.model }} - {{ car.color }} - {{ car.licensePlate }} - {{  }}</span>
           </div>
           <div class="flip-card-back">
-            <p>Owner: {{ car.ownerName }}</p>
-            <p>Contact: {{ car.ownerContact }}</p>
+            <p>Owner: {{ car.name }}</p>
+            <p>Contact: {{ car.phoneNumber }}</p>
             <p>Color: {{ car.color }}</p>
-            <p>Parking Spot: {{ car.parkingSpots }}</p>
+            <p>Parking Spot: {{ car.spotNumber }}</p>
           </div>
         </div>
       </li>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import ParkedCarsInfoService from '../services/ParkedCarsInfoService';
 export default {
   data() {
     return {
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     fetchCars() {
-      axios.get('/cars')
+      ParkedCarsInfoService.getParkedCarsInfo()
         .then(response => {
           this.cars = response.data.map(car => ({ ...car, isFlipped: false }));
         })
