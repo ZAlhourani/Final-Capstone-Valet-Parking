@@ -66,7 +66,7 @@ public class JdbcPatronsDao implements PatronsDao{
 
         Patrons patron = new Patrons();
 
-        String sql = "select patron_id from patrons where user_id = ?;";
+        String sql = "select * from patrons where user_id = ?;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
