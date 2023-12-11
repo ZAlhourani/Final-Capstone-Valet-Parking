@@ -40,6 +40,20 @@ public class PatronController {
     }
 
     @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/patrons/user/{userId}")
+    public Patrons getPatronIdByUserId (@PathVariable int userId) {
+
+        Patrons result = patronsDao.getPatronIdByUserId(userId);
+        if (result == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No patron with that id.");
+        } else {
+            return result;
+        }
+    }
+
+
+
+    @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/patrons/{phoneNumber}")
     public Patrons getPatronByPhoneNumber (@PathVariable String phoneNumber) {
 
@@ -65,7 +79,5 @@ public class PatronController {
 
         return patronsDao.updatePatron(updatedPatron);
     }
-
-
 
 }

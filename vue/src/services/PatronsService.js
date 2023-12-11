@@ -10,6 +10,10 @@ export default {
         return axios.get(`/patrons/${patronId}`);
     },
 
+    getPatronIdByUserId(userId){
+        return axios.get(`/patrons/user/${userId}`);
+    },
+
     getPatronByPhoneNumber(phoneNumber){
         return axios.get(`/patrons/${phoneNumber}`);
     },
