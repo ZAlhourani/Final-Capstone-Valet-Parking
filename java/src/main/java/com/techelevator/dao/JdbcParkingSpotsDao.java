@@ -51,6 +51,25 @@ public class JdbcParkingSpotsDao implements ParkingSpotsDao {
     }
 
     @Override
+    public ParkingSpots getParkingSpotByCarId(int carId) {
+
+        ParkingSpots parkingSpot = new ParkingSpots();
+
+        String sql = "select * from parking_spots where car_id = ?;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, carId);
+
+            if (results.next()) {
+                parkingSpot = mapRowToParkingSpots(results);
+            }
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return parkingSpot;
+    }
+
+    @Override
     public ParkingSpots getParkingSpotBySpotNumber(int spotNumber) {
 
         ParkingSpots parkingSpot = new ParkingSpots();

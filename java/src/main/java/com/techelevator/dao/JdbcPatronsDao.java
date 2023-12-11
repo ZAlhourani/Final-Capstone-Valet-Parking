@@ -62,6 +62,25 @@ public class JdbcPatronsDao implements PatronsDao{
     }
 
     @Override
+    public Patrons getPatronIdByUserId(int userId) {
+
+        Patrons patron = new Patrons();
+
+        String sql = "select patron_id from patrons where user_id = ?;";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+
+            if (results.next()) {
+                patron = mapRowToPatrons(results);
+            }
+        }catch (CannotGetJdbcConnectionException e){
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return patron;
+    }
+
+    @Override
     public Patrons getPatronByPhoneNumber(String phoneNumber) {
 
         Patrons patron = new Patrons();

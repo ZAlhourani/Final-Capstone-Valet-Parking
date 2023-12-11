@@ -9,6 +9,7 @@ public interface PatronsDao {
 
     List<Patrons> getAllPatron();
     Patrons getPatronById(int patronId);
+    Patrons getPatronIdByUserId(int userId);
     Patrons getPatronByPhoneNumber(String phoneNumber);
     Patrons createNewPatron(Patrons newPatron);
     Patrons updatePatron(Patrons patron);
