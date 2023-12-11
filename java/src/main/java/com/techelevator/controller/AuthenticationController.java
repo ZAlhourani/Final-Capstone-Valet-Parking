@@ -31,10 +31,11 @@ public class AuthenticationController {
     private UserDao userDao;
     private PatronsDao patronsDao;
 
-    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao) {
+    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, PatronsDao patronsDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
+        this.patronsDao = patronsDao;
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
@@ -71,8 +72,6 @@ public class AuthenticationController {
             }
 
             User user = userDao.createUser(newUser);
-
-
             Patrons newPatron = new Patrons();
             newPatron.setName(newUser.getName());
             newPatron.setPhoneNumber(newUser.getPhoneNumber());
@@ -80,8 +79,6 @@ public class AuthenticationController {
             newPatron.setUserId(user);
 
             patronsDao.createNewPatron(newPatron);
-
-
 
             if (user == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User registration failed.");
