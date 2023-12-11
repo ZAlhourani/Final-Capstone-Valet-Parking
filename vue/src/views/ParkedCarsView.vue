@@ -14,13 +14,13 @@
       <li v-for="car in filteredCars" :key="car.id" class="flip-card" @click="flipCard(car)">
         <div class="flip-card-inner" :class="{flipped: car.isFlipped}">
           <div class="flip-card-front">
-            <span>{{ car.make }} - {{ car.model }} - {{ car.color }} - {{ car.licensePlate }} - {{ car.vinNumber }}</span>
+            <span>{{ car.make }} - {{ car.model }} - {{ car.color }} - {{ car.licensePlate }} - {{  }}</span>
           </div>
           <div class="flip-card-back">
             <p>Owner: {{ car.ownerName }}</p>
             <p>Contact: {{ car.ownerContact }}</p>
             <p>Color: {{ car.color }}</p>
-            <p>Parking Spot: {{ car.parkingSpot }}</p>
+            <p>Parking Spot: {{ car.parkingSpots }}</p>
           </div>
         </div>
       </li>
@@ -78,7 +78,8 @@ export default {
       });
     },
     flipCard(car) {
-      car.isFlipped = !car.isFlipped;
+      
+       car.isFlipped = !car.isFlipped;
     }
   },
   created() {
@@ -161,101 +162,3 @@ color: #333;
 }
 </style>
 
-<!-- <template>
-  <div>
-    <h1>Parked Cars</h1>
-    <div class="filters">
-      <input v-model="filter" placeholder="Filter cars..." type="text">
-      <select v-model="sortKey" @change="sortCars">
-        <option value="make">Make</option>
-        <option value="model">Model</option>
-        <option value="year">Year</option>
-        <option value="color">Color</option>
-      </select>
-    </div>
-    <ul class="car-list">
-      <li v-for="car in filteredCars" :key="car.id" class="flip-card" @click="flipCard(car)">
-        <div class="flip-card-inner" :class="{flipped: car.isFlipped}">
-          <div class="flip-card-front">
-            <span>{{ car.make }} - {{ car.model }} - {{ car.year }} - {{ car.color }}</span>
-          </div>
-          <div class="flip-card-back">
-            <p>Owner: {{ car.ownerName }}</p>
-            <p>Contact: {{ car.ownerContact }}</p>
-            <p>Color: {{ car.color }}</p>
-            <p>Parking Spot: {{ car.parkingSpot }}</p>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</template>
-<script>
-import axios from 'axios';
-export default {
-
-  data() {
-    return {
-      cars: [],
-      filter: '',
-      sortKey: 'make'
-    };
-  },
-  computed: {
-    filteredCars() {
-      let filtered = this.cars;
-      if (this.filter) {
-        const filterLowerCase = this.filter.toLowerCase();
-        filtered = filtered.filter(car =>
-          car.make.toLowerCase().includes(filterLowerCase) ||
-          car.model.toLowerCase().includes(filterLowerCase) ||
-          car.year.toString().includes(this.filter) ||
-          (car.color && car.color.toLowerCase().includes(filterLowerCase)) ||
-          (car.ownerName && car.ownerName.toLowerCase().includes(filterLowerCase)) ||
-          (car.parkingSpot && car.parkingSpot.toLowerCase().includes(filterLowerCase)) ||
-          (car.ownerContact && car.ownerContact.includes(this.filter))
-        );
-      }
-      return filtered.sort((a, b) => (a[this.sortKey] > b[this.sortKey] ? 1 : -1));
-    }
-  },
-  methods: {
-    fetchCars() {
-  axios.get('/cars') 
-    .then(response => {
-      this.cars = response.data.map(car => ({ ...car, isFlipped: false }));
-    })
-    .catch(error => {
-      console.error('Error fetching cars:', error);
-    });
-},
-    sortCars() {
-      this.cars.sort((a, b) => {
-        if (a[this.sortKey] < b[this.sortKey]) {
-          return -1;
-        }
-        if (a[this.sortKey] > b[this.sortKey]) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    flipCard(car) {
-  if (!car.isFlipped) {
-    this.getCarDetails(car.id)
-      .then(response => {
-        Object.assign(car, response.data); // Merge detailed data into car object
-      })
-      .catch(error => {
-        console.error('Error fetching car details:', error);
-      });
-  }
-  car.isFlipped = !car.isFlipped;
-}
-
-  },
-  created() {
-    this.fetchCars();
-  }
-};
-</script> -->
