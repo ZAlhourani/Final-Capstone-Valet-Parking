@@ -11,7 +11,7 @@ export default {
     },
 
     getPatronIdByUserId(userId){
-        return axios.get(`/patrons/${userId}`);
+        return axios.get(`/patrons/user/${userId}`);
     },
 
     getPatronByPhoneNumber(phoneNumber){

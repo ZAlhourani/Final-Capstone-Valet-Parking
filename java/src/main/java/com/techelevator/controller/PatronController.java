@@ -40,10 +40,10 @@ public class PatronController {
     }
 
     @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/patrons/{userId}")
+    @GetMapping("/patrons/user/{userId}")
     public Patrons getPatronIdByUserId (@PathVariable int userId) {
 
-        Patrons result = patronsDao.getPatronById(userId);
+        Patrons result = patronsDao.getPatronIdByUserId(userId);
         if (result == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No patron with that id.");
         } else {
