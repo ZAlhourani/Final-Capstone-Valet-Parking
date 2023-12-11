@@ -55,6 +55,11 @@ public class ParkingSpotController {
 
          return parkingSpotsDao.getParkingSpotByAvailability(isAvailable);
     }
+    @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/parking-spots/{carId}")
+    public ParkingSpots getParkingSpotByCarId (@PathVariable int carId){
+        return parkingSpotsDao.getParkingSpotByCarId(carId);
+    }
 
     @PreAuthorize("hasRole('ROLE_VALET')")
     @PutMapping("/parking-spots/{spotNumber}")
