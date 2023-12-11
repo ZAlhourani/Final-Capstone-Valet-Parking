@@ -67,7 +67,7 @@ public class JdbcPatronsDao implements PatronsDao{
         String sql = "insert into patrons (user_id, name, phone_number) " +
                 "values (?,?,?) returning patron_id";
         try {
-            int patronId = jdbcTemplate.queryForObject(sql, Integer.class, newPatron.getUserId(),
+            int patronId = jdbcTemplate.queryForObject(sql, Integer.class, newPatron.getUserId().getId(),
                     newPatron.getName(), newPatron.getPhoneNumber());
 
             return getPatronById(patronId);
