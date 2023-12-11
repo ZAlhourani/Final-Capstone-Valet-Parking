@@ -71,13 +71,17 @@ public class AuthenticationController {
             }
 
             User user = userDao.createUser(newUser);
-//            Patrons newPatron = new Patrons();
-//            newPatron.setName(newUser.getName());
-//            newPatron.setPhoneNumber(newUser.getPhoneNumber());
 
-//            newPatron.setUserId(user);
 
-//            patronsDao.createNewPatron(newPatron);
+            Patrons newPatron = new Patrons();
+            newPatron.setName(newUser.getName());
+            newPatron.setPhoneNumber(newUser.getPhoneNumber());
+
+            newPatron.setUserId(user);
+
+            patronsDao.createNewPatron(newPatron);
+
+
 
             if (user == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User registration failed.");

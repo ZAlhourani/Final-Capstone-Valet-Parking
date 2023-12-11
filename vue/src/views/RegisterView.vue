@@ -60,6 +60,7 @@ export default {
         name: '',
         phoneNumber: ''
       },
+
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
     };
