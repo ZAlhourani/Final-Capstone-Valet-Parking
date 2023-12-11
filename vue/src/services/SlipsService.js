@@ -14,6 +14,10 @@ export default {
         return axios.get(`/slips/${slipNumber}`);
     },
 
+    getSlipsByPatronId(patronId){
+        return axios.get(`/slips/${patronId}`);
+    },
+
     getSlipByCarId(carId) {
         return axios.get(`/slips/${carId}`);
     },

@@ -10,6 +10,10 @@ export default {
         return axios.get(`/patrons/${patronId}`);
     },
 
+    getPatronByPhoneNumber(phoneNumber){
+        return axios.get(`/patrons/${phoneNumber}`);
+    },
+
     createNewPatron(newPatron) {
         return axios.post('/patrons', newPatron);
     },
