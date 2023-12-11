@@ -14,13 +14,13 @@
       <li v-for="car in filteredCars" :key="car.id" class="flip-card" @click="flipCard(car)">
         <div class="flip-card-inner" :class="{flipped: car.isFlipped}">
           <div class="flip-card-front">
-            <span>{{ car.make }} - {{ car.model }} - {{ car.color }} - {{ car.licensePlate }} - {{  }}</span>
+            <span>{{ car.make }} - {{ car.model }} - {{ car.color }} - {{ car.licensePlate }}</span>
           </div>
           <div class="flip-card-back">
             <p>Owner: {{ car.ownerName }}</p>
-            <p>Contact: {{ car.ownerContact }}</p>
+            <p>Contact: {{ car.phoneNumber }}</p>
             <p>Color: {{ car.color }}</p>
-            <p>Parking Spot: {{ car.parkingSpots }}</p>
+            <p>Parking Spot: {{ car.parkingSpot }}</p>
           </div>
         </div>
       </li>
