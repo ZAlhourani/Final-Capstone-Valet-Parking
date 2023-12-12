@@ -26,12 +26,13 @@
       </tbody>
     </table>
   </div>
-  <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>
+   <button type="submit">Request Pickup</button>
+  <!-- <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link> -->
 </template>
 
 <script>
 import SlipsService from '../services/SlipsService';
-import PatronsService from '../services/PatronsService.js'
+import CheckInDtoService from '../services/CheckInDtoService';
 
 export default {
   data() {
@@ -48,11 +49,19 @@ export default {
     },
   methods: {
 
+    submitCarPickUp() {
+      CheckInDtoService.checkOut(this.slip) 
+      .then(response => {
+        this.slips = response.data;
+      })
+    },
+
     formatTime(time) {
       if (!time) return 'N/A';
     },
 
     total(slip) {
+      
       if (slip.departureTime != null) { // user already picked it up
         return slip.total;
       }
