@@ -15,9 +15,7 @@ import java.util.List;
 @Component
 public class JdbcSlipsDao implements SlipsDao {
 
-    private final JdbcTemplate jdbcTemplate;
-
-    private final PatronsDao patronsDao;
+    private final JdbcTemplate jdbcTemplate;+    private final PatronsDao patronsDao;
 
     private final CarsDao carsDao;
 
@@ -67,17 +65,17 @@ public class JdbcSlipsDao implements SlipsDao {
     }
 
     @Override
-    public Slips getSlipByPatronId(int patronId) {
+    public List<Slips> getSlipByPatronId(int patronId) {
 
-        Slips slip = new Slips();
+        List<Slips> slip = new ArrayList<Slips>();
 
         String sql = "select * from slips where patron_id =?;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, patronId);
 
-            if (results.next()) {
-                slip = mapRowToSlips(results);
+            while (results.next()) {
+                slip.add( mapRowToSlips(results)) ;
             }
         }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server or database", e);
@@ -112,9 +110,14 @@ public class JdbcSlipsDao implements SlipsDao {
                 "values (?,?,?,?,?,?) returning slip_number;";
 
         try {
-            int slipNumber = jdbcTemplate.queryForObject(sql, Integer.class,
-                    newSlip.getPatronId().getPatronId(), newSlip.getCarId().getCarId(), newSlip.getArrivalTime(),
-                    newSlip.getDepartureTime(), newSlip.getHourlyPrice(), newSlip.getTotal());
+            int slipNumber = jdbcTemplate.queryForObject(sql,
+                    Integer.class,
+                    newSlip.getPatronId().getPatronId(),
+                    newSlip.getCarId().getCarId(),
+                    newSlip.getArrivalTime(),
+                    newSlip.getDepartureTime(),
+                    newSlip.getHourlyPrice(),
+                    newSlip.getTotal());
 
             return getSlipBySlipNumber(slipNumber);
         }catch (CannotGetJdbcConnectionException e) {
