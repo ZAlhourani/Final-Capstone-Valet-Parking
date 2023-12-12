@@ -40,8 +40,8 @@ public class SlipController {
 
     @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/slips/{patronId}")
-    public Slips getSlipsByPatronId (@PathVariable int patronId){
-        Slips result = slipsDao.getSlipByPatronId(patronId);
+    public List<Slips> getSlipsByPatronId (@PathVariable int patronId){
+        List<Slips> result = slipsDao.getSlipByPatronId(patronId);
 
         if (result == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
@@ -62,7 +62,7 @@ public class SlipController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/slips")
     public Slips createNewSlip (@RequestBody Slips newSlip) {
         return slipsDao.createNewSlip(newSlip);

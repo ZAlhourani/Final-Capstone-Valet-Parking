@@ -44,6 +44,7 @@
 </template>
 <script>
 import CheckInDtoService from '../services/CheckInDtoService';
+
 export default {
   data() {
     return {
