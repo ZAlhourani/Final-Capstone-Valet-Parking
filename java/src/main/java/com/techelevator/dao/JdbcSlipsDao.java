@@ -17,7 +17,6 @@ import java.util.List;
 public class JdbcSlipsDao implements SlipsDao {
 
     private final JdbcTemplate jdbcTemplate;
-
     private final PatronsDao patronsDao;
 
     private final CarsDao carsDao;
