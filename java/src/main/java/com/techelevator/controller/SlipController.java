@@ -38,8 +38,8 @@ public class SlipController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/slips/{patronId}")
+//    @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/slips/patrons/{patronId}")
     public List<Slips> getSlipsByPatronId (@PathVariable int patronId){
         List<Slips> result = slipsDao.getSlipByPatronId(patronId);
 
@@ -51,7 +51,7 @@ public class SlipController {
     }
 
     @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/slips/{carId}")
+    @GetMapping("/slips/cars/{carId}")
     public Slips getSlipByCarId (@PathVariable int carId){
         Slips result = slipsDao.getSlipByCarId(carId);
 
