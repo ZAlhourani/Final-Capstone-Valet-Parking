@@ -46,6 +46,7 @@ export default {
     },
 
     total(slip) {
+      
       if (slip.departureTime != null) { // user already picked it up
         return slip.total;
       }

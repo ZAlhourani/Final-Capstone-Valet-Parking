@@ -4,10 +4,7 @@ import com.techelevator.dao.*;
 import com.techelevator.model.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
@@ -67,6 +64,21 @@ public class CheckInDtoController {
         newSlip.setCarId(newCar);
         newSlip = slipsDao.createNewSlip(newSlip);
         return newSlip;
+    }
+
+    @PutMapping("/check-out")
+    public Slips checkOutCar(@RequestBody Slips slip){
+
+        ParkingSpots newParkingSpot = new ParkingSpots();
+
+        if (!newParkingSpot.isAvailable()) {
+
+            parkingSpotsDao.updateParkingSpot(newParkingSpot);
+//            slip.setDepartureTime();
+            slip.setTotal(slip.getTotal());
+
+        }
+        return slip;
     }
 }
 
