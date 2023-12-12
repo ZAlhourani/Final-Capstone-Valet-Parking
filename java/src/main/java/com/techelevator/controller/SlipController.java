@@ -42,7 +42,6 @@ public class SlipController {
     @GetMapping("/slips/patrons/{patronId}")
     public List<Slips> getSlipsByPatronId (@PathVariable int patronId){
         List<Slips> result = slipsDao.getSlipByPatronId(patronId);
-
         if (result == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
         } else {
