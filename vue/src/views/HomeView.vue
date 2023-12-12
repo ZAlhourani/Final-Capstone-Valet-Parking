@@ -3,7 +3,7 @@
        
     <h1>Servizio di Auto</h1>
 
-    <p>The current temperature is {{ current.current.temperature_2m }}{{ current.current_units.temperature_2m }}</p>
+    <p>The current temperature in Pittsburgh is {{ current.current.temperature_2m }}{{ current.current_units.temperature_2m }}</p>
   </div>
 </template>
 
