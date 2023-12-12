@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @RestController
 @CrossOrigin
@@ -72,11 +73,16 @@ public class CheckInDtoController {
         ParkingSpots newParkingSpot = new ParkingSpots();
 
         if (!newParkingSpot.isAvailable()) {
-
+            newParkingSpot.setCarId(null);
+            newParkingSpot.setAvailable(true);
             parkingSpotsDao.updateParkingSpot(newParkingSpot);
-//            slip.setDepartureTime();
-            slip.setTotal(slip.getTotal());
 
+            Slips currentSlip = slipsDao.getSlipBySlipNumber(slip.getSlipNumber());
+
+            currentSlip.setDepartureTime(slip.getDepartureTime());
+            currentSlip.setTotal(slip.getTotal());
+
+            return slipsDao.updateSlip(currentSlip);
         }
         return slip;
     }
