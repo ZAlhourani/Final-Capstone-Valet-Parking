@@ -17,21 +17,22 @@
         <tr v-for="slip in slips" :key="slip.slip_number">
           <td>{{ slip.slipNumber }}</td>
           <td>{{ slip.patronId.name }}</td>
-          <td>{{ slip.carid }}</td>
-          <td>{{ formatTime(slip.arrivalTime) }}</td>
-          <td>{{ formatTime(slip.departureTime) }}</td>
+          <td>{{ slip.carId.carId }}</td>
+          <td>{{ slip.arrivalTime }}</td>
+          <td>{{ slip.departureTime }}</td>
           <td>{{ slip.hourlyPrice }}</td>
           <td>{{ total(slip) }}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>
+   <button type="submit" v-on:click="submitCarPickUp">Request Pickup</button>
+  <!-- <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link> -->
 </template>
 
 <script>
 import SlipsService from '../services/SlipsService';
-import PatronsService from '../services/PatronsService.js'
+import CheckInDtoService from '../services/CheckInDtoService';
 
 export default {
   data() {
@@ -58,11 +59,19 @@ export default {
     },
   methods: {
 
+    submitCarPickUp(slip) {
+      CheckInDtoService.checkOut(slip) 
+      .then(response => {
+        this.slips = response.data;
+      })
+    },
+
     formatTime(time) {
       if (!time) return 'N/A';
     },
 
     total(slip) {
+      
       if (slip.departureTime != null) { // user already picked it up
         return slip.total;
       }
@@ -99,6 +108,8 @@ td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  color: white;
+  font-weight: 500;
 }
 
 th {
