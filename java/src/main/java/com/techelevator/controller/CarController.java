@@ -26,11 +26,24 @@ public class CarController {
     public Cars getCarById (@PathVariable int carId){
         Cars result = carsDao.getCarByCarId(carId);
         if (result == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No car with that id.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No car with that car id.");
         } else {
             return result;
         }
     }
+
+    @PreAuthorize("hasRole('ROLE_VALET')")
+    @GetMapping("/cars/patron/{patronId}")
+    public Cars getCarByPatronId (@PathVariable int patronId){
+        Cars result = carsDao.getCarByPatronId(patronId);
+        if (result == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No car with that patron id.");
+        } else {
+            return result;
+        }
+    }
+
+
 
     @PreAuthorize("hasRole('ROLE_VALET')")
     @PostMapping("/cars")

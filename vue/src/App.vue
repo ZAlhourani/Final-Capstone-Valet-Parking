@@ -2,10 +2,10 @@
   <div id="capstone-app">
     <div v-if="showUserNav" id="userNav">
       <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;
+      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;
     </div>
     <div v-if = "showAdminNav" id="AdminNav">
       <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>&nbsp;|&nbsp;
@@ -13,8 +13,8 @@
       <router-link v-bind:to="{ name: 'valet-request-pickup' }">Valet Request Pickup</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'ParkedCars' }">Parking Lot</router-link> &nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;
+      <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>
     </div>
     <router-view />
   </div>
