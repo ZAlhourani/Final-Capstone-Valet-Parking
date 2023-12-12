@@ -11,6 +11,17 @@ public class ParkedCarsInfoDto {
     private String phoneNumber;
     private int spotNumber;
     private double total;
+    private boolean isAvailable;
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+
 
     public String getMake() {
         return make;

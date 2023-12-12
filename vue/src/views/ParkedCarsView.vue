@@ -1,4 +1,5 @@
-<template>
+
+ <template>
   <div>
     <h1>Parked Cars</h1>
     <div class="filters">
@@ -14,7 +15,7 @@
       <li v-for="car in filteredCars" :key="car.id" class="flip-card" @click="flipCard(car)">
         <div class="flip-card-inner" :class="{flipped: car.isFlipped}">
           <div class="flip-card-front">
-            <span>{{ car.make }} - {{ car.model }} - {{ car.color }} - {{ car.licensePlate }}</span>
+            <span>{{ car.make }} - {{ car.model }} - {{ car.color }} - {{ car.licensePlate }} - {{  }}</span>
           </div>
           <div class="flip-card-back">
             <p>Owner: {{ car.name }}</p>
@@ -161,4 +162,6 @@ font-size: 1.1em;
 color: #333;
 }
 </style>
+
+
 
