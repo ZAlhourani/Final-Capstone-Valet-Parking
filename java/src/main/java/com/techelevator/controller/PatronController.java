@@ -54,7 +54,7 @@ public class PatronController {
 
 
     @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/patrons/{phoneNumber}")
+    @GetMapping("/patrons/phone/{phoneNumber}")
     public Patrons getPatronByPhoneNumber (@PathVariable String phoneNumber) {
 
         Patrons result = patronsDao.getPatronByPhoneNumber(phoneNumber);

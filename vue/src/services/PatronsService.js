@@ -15,7 +15,7 @@ export default {
     },
 
     getPatronByPhoneNumber(phoneNumber){
-        return axios.get(`/patrons/${phoneNumber}`);
+        return axios.get(`/patrons/phone/${phoneNumber}`);
     },
 
     createNewPatron(newPatron) {
