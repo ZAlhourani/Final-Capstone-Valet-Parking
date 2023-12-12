@@ -8,20 +8,15 @@ export default {
     },
 
     getSlipByPatronId(patronId) {
-        return axios.get(`/slips/${patronId}`);
+        return axios.get(`/slips/patrons/${patronId}`);
     },
 
     getSlipBySlipNumber(slipNumber) {
         return axios.get(`/slips/${slipNumber}`);
     },
     
-    getSlipsByPatronId(patronId){
-        return axios.get(`/slips/${patronId}`);
-    },
-
-
     getSlipByCarId(carId) {
-        return axios.get(`/slips/${carId}`);
+        return axios.get(`/slips/cars/${carId}`);
     },
 
     createNewSlip(newSlip){
