@@ -2,13 +2,13 @@
   <div class="parking-lot-container">
     <h2>Parking Lot Availability</h2>
     <div v-if="isLotFull" class="lot-full-warning">
-      <p><strong>Warning:</strong> Lot is Full!</p>
+      <p class="warning-message"><strong>Warning:</strong> Lot is Full!</p>
     </div>
     <div class="parking-lot">
       <div v-for="row in formattedParkingSpots" :key="row[0].spotNumber" class="parking-row">
         <div v-for="spot in row" :key="spot.spotNumber" class="parking-spot" :class="{ 'available': spot.isAvailable, 'occupied': !spot.isAvailable }">
           <p>Spot {{ spot.spotNumber }}</p>
-          <p v-if="!spot.isAvailable">Occupied</p>
+         <p v-if="!spot.isAvailable">Occupied</p>
           <p v-else>Available</p>
         </div>
       </div>
@@ -78,6 +78,11 @@ export default {
 </script>
 
 <style scoped>
+
+.warning-message{
+  color: red;
+  font-weight: 1000;
+}
 .parking-lot-container {
   max-width: 800px;
   margin: auto;
