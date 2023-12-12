@@ -112,9 +112,14 @@ public class JdbcSlipsDao implements SlipsDao {
                 "values (?,?,?,?,?,?) returning slip_number;";
 
         try {
-            int slipNumber = jdbcTemplate.queryForObject(sql, Integer.class,
-                    newSlip.getPatronId().getPatronId(), newSlip.getCarId().getCarId(), newSlip.getArrivalTime(),
-                    newSlip.getDepartureTime(), newSlip.getHourlyPrice(), newSlip.getTotal());
+            int slipNumber = jdbcTemplate.queryForObject(sql,
+                    Integer.class,
+                    newSlip.getPatronId().getPatronId(),
+                    newSlip.getCarId().getCarId(),
+                    newSlip.getArrivalTime(),
+                    newSlip.getDepartureTime(),
+                    newSlip.getHourlyPrice(),
+                    newSlip.getTotal());
 
             return getSlipBySlipNumber(slipNumber);
         }catch (CannotGetJdbcConnectionException e) {

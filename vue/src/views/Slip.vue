@@ -6,7 +6,7 @@
         <tr>
           <th>Slip Number</th>
           <th>Patron Name</th>
-          <!-- <th>Car</th> -->
+          <th>Car</th>
           <th>Arrival Time</th>
           <th>Departure Time</th>
           <th>Hourly Price</th>
@@ -16,8 +16,8 @@
       <tbody>
         <tr v-for="slip in slips" :key="slip.slip_number">
           <td>{{ slip.slipNumber }}</td>
-          <td>{{ slip.patronId }}</td>
-          <!-- <td>{{ slip.car_id }}</td> -->
+          <td>{{ slip.patronId.name }}</td>
+          <td>{{ slip.carid }}</td>
           <td>{{ formatTime(slip.arrivalTime) }}</td>
           <td>{{ formatTime(slip.departureTime) }}</td>
           <td>{{ slip.hourlyPrice }}</td>
@@ -41,7 +41,13 @@ export default {
       ]
     };
   },
+  created() {
+      SlipsService.getAllSlipsList().then(data => {
+        this.slips = data.data;
+      });
+    },
   methods: {
+
     formatTime(time) {
       if (!time) return 'N/A';
     },
@@ -54,7 +60,6 @@ export default {
       const assumedDepartureTime = new Date();
       const parkingDurationInHours = (assumedDepartureTime - slip.arrival_time) / (1000 * 60 * 60);
       const parkingTotal = parkingDurationInHours * slip.hourlyPrice;
-
 
       // const slipInfo = SlipsService.getSlipBySlipNumber();
 

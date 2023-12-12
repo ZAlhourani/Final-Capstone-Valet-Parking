@@ -62,7 +62,7 @@ public class SlipController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/slips")
     public Slips createNewSlip (@RequestBody Slips newSlip) {
         return slipsDao.createNewSlip(newSlip);

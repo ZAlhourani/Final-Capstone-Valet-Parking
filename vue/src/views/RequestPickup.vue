@@ -23,6 +23,8 @@
   </template>
   
   <script>
+  import SlipsService from '../services/SlipsService';
+  import PatronsService from '../services/PatronsService';
   export default {
     data() {
       return {
@@ -34,10 +36,48 @@
       };
     },
     methods: {
-      submitPickupRequest() {
+      async submitPickupRequest() {
         console.log('Pickup request submitted:', this.pickupData);
-        this.pickupData = { location: '', time: '', notes: '' };
-        alert('Your pickup request has been submitted.');
+
+        var pickupTime = this.pickupData.time
+        var today = new Date();
+        var [hours, minutes] = pickupTime.split(':');
+
+        // Set the hours and minutes of the Date object
+        today.setHours(hours, minutes, 0, 0);
+        if (today < new Date()) {
+          // If yes, set it to tomorrow
+          today.setDate(today.getDate() + 1);
+        }
+
+        // Convert to ISO 8601 format
+        var isoString = today.toISOString();
+
+        // Remove the milliseconds and timezone information
+        isoString = isoString.slice(0, -5);
+
+
+        PatronsService.getPatronIdByUserId(this.$store.state.user.id).then(data => {
+
+          data.data.userId.authorities = toString(data.data.userId.authorities);
+
+          console.log(pickupTime);
+            const slip = {
+            patronId: data.data,
+            arrivalTime: isoString,
+            departure_time : '',
+            hourly_price: 5,
+            total: 0
+          };
+        
+          SlipsService.createNewSlip(slip);
+        })
+        .finally(() => {
+            this.pickupData = { location: '', time: '', notes: '' };
+            alert('Your pickup request has been submitted.');
+          }
+        );
+      
       }
     }
   };
