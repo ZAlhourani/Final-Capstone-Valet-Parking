@@ -92,7 +92,7 @@ export default {
 <style scoped>
 h1 {
 text-align: center;
-color: #333;
+/* color: #333; */
 }
 .filters {
 display: flex;
