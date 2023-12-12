@@ -42,9 +42,19 @@ export default {
     };
   },
   created() {
+    if ( this.$store.state.user.authorities[0].name === 'ROLE_USER') {
+      
+      PatronsService.getPatronIdByUserId(this.$store.state.user.id).then(data => {
+        SlipsService.getSlipByPatronId(data.data.patronId).then(data => {
+          this.slips = data.data;
+        })
+      })
+    //  SlipsService.getSlipsByPatronId()
+    // } else {
       SlipsService.getAllSlipsList().then(data => {
         this.slips = data.data;
       });
+    }
     },
   methods: {
 

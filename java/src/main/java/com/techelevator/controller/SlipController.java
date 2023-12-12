@@ -21,24 +21,24 @@ public class SlipController {
     public SlipController(SlipsDao slipsDao) {
         this.slipsDao = slipsDao;
     }
-    @PreAuthorize("hasRole('ROLE_VALET')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/slips")
     public List<Slips> getAllSlipsList(){
         return slipsDao.getAllSlips();
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/slips/{slipNumber}")
-    public Slips getSlipBySlipNumber (@PathVariable int slipNumber) {
-        Slips result = slipsDao.getSlipBySlipNumber(slipNumber);
-        if (result == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
-        } else {
-            return result;
-        }
-    }
+//    @PreAuthorize("hasRole('ROLE_VALET')")
+//    @GetMapping("/slips/{slipNumber}")
+//    public Slips getSlipBySlipNumber (@PathVariable int slipNumber) {
+//        Slips result = slipsDao.getSlipBySlipNumber(slipNumber);
+//        if (result == null) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
+//        } else {
+//            return result;
+//        }
+//    }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/slips/{patronId}")
     public List<Slips> getSlipsByPatronId (@PathVariable int patronId){
         List<Slips> result = slipsDao.getSlipByPatronId(patronId);
@@ -50,17 +50,17 @@ public class SlipController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/slips/{carId}")
-    public Slips getSlipByCarId (@PathVariable int carId){
-        Slips result = slipsDao.getSlipByCarId(carId);
-
-        if (result == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
-        } else {
-            return result;
-        }
-    }
+//    @PreAuthorize("hasRole('ROLE_VALET')")
+//    @GetMapping("/slips/{carId}")
+//    public Slips getSlipByCarId (@PathVariable int carId){
+//        Slips result = slipsDao.getSlipByCarId(carId);
+//
+//        if (result == null) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
+//        } else {
+//            return result;
+//        }
+//    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/slips")
