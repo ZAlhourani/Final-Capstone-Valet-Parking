@@ -53,7 +53,7 @@ public class ParkingSpotController {
     @GetMapping("/parking-spots/availability/{isAvailable}")
     public List<ParkingSpots> getParkingSpotByAvailability (@PathVariable boolean isAvailable) {
 
-         return parkingSpotsDao.getParkingSpotByAvailability(isAvailable);
+        return parkingSpotsDao.getParkingSpotByAvailability(isAvailable);
     }
     @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/parking-spots/cars/{carId}")
