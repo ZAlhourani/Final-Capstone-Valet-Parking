@@ -1,4 +1,5 @@
 import axios from "axios";
+import SlipsService from '../services/SlipsService.js'
 
 export default {
 
@@ -17,6 +18,7 @@ export default {
     getSlipsByPatronId(patronId){
         return axios.get(`/slips/${patronId}`);
     },
+
 
     getSlipByCarId(carId) {
         return axios.get(`/slips/${carId}`);
