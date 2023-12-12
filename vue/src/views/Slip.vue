@@ -17,16 +17,16 @@
         <tr v-for="slip in slips" :key="slip.slip_number">
           <td>{{ slip.slipNumber }}</td>
           <td>{{ slip.patronId.name }}</td>
-          <td>{{ slip.carid }}</td>
-          <td>{{ formatTime(slip.arrivalTime) }}</td>
-          <td>{{ formatTime(slip.departureTime) }}</td>
+          <td>{{ slip.carId.carId }}</td>
+          <td>{{ slip.arrivalTime }}</td>
+          <td>{{ slip.departureTime }}</td>
           <td>{{ slip.hourlyPrice }}</td>
           <td>{{ total(slip) }}</td>
         </tr>
       </tbody>
     </table>
   </div>
-   <button type="submit">Request Pickup</button>
+   <button type="submit" v-on:click="submitCarPickUp">Request Pickup</button>
   <!-- <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link> -->
 </template>
 
@@ -49,8 +49,8 @@ export default {
     },
   methods: {
 
-    submitCarPickUp() {
-      CheckInDtoService.checkOut(this.slip) 
+    submitCarPickUp(slip) {
+      CheckInDtoService.checkOut(slip) 
       .then(response => {
         this.slips = response.data;
       })
@@ -98,6 +98,8 @@ td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  color: white;
+  font-weight: 500;
 }
 
 th {

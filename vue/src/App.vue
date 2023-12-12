@@ -4,14 +4,15 @@
       <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;|&nbsp;
       <!-- <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>&nbsp;|&nbsp; -->
       <!-- <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link>&nbsp;|&nbsp; -->
-      <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'CustomerParkingAvailability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
+     
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>&nbsp;
     </div>
     <div v-if = "showAdminNav" id="AdminNav">
       <router-link v-bind:to="{ name: 'home' }" v-show="$route.name !== 'login'">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'check-in' }" v-if="$store.state.token">Check In</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'lot-availability'}" v-show="$route.name !== 'login'">Lot Availability</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'ParkedCars' }">Parking Lot</router-link> &nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'ParkedCars' }">Car Details</router-link> &nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'slips' }" v-if="$store.state.token">Parking Slips</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>
     </div>
