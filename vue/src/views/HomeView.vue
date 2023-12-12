@@ -2,11 +2,60 @@
   <div class="home">
        
     <h1>Servizio di Auto</h1>
+
+    <p>The current temperature in Pittsburgh is {{ current.current.temperature_2m }}{{ current.current_units.temperature_2m }}</p>
   </div>
 </template>
 
 <script>
+import ApiService from '../services/ApiService';
+
 export default {
+
+  data() {
+    return {
+
+      
+      latitude: '',
+      longitude: '',
+      generationtime_ms: '',
+      utc_offset_seconds: '',
+      timezone: '',
+      timezone_abbreviation: '',
+      elevation: '',
+
+    current_units: {
+        time: '',
+        interval: '',
+        temperature_2m: ''
+    },
+
+    current: {
+        time: '',
+        interval: '',
+        temperature_2m: ''
+    }
+  };
+  },
+
+  methods: {
+
+    getCurrentWeather() {
+
+      // const weatherData = {
+      //   ...this.current_units,
+      //   ...this.current
+      // }
+
+      ApiService.getWeather()
+      .then(response => {
+        this.current = response.data;
+        this.isLoading = false;
+      })
+    }
+
+  },
+
   computed: {
     showHomeLink() {
       return this.$route.name !== 'login';
@@ -21,6 +70,10 @@ export default {
       return this.$store.state.token;
     },
   },
+
+  created() {
+    this.getCurrentWeather();
+  }
   
 }; 
 
