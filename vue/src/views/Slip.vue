@@ -15,13 +15,13 @@
       </thead>
       <tbody>
         <tr v-for="slip in slips" :key="slip.slip_number">
-          <td>{{ slip.slip_number }}</td>
-          <td>{{ slip.patron_id }}</td>
+          <td>{{ slip.slipNumber }}</td>
+          <td>{{ slip.patronId }}</td>
           <!-- <td>{{ slip.car_id }}</td> -->
-          <td>{{ formatTime(slip.arrival_time) }}</td>
-          <td>{{ formatTime(slip.departure_time) }}</td>
-          <td>{{ slip.hourly_price = 5.00 }}</td>
-          <td>{{ slip.total }}</td>
+          <td>{{ formatTime(slip.arrivalTime) }}</td>
+          <td>{{ formatTime(slip.departureTime) }}</td>
+          <td>{{ slip.hourlyPrice }}</td>
+          <td>{{ total(slip) }}</td>
         </tr>
       </tbody>
     </table>
@@ -46,19 +46,23 @@ export default {
       if (!time) return 'N/A';
     },
 
-    total() {
-      const slipInfo = SlipsService.getSlipBySlipNumber();
+    total(slip) {
+      if (slip.departureTime != null) { // user already picked it up
+        return slip.total;
+      }
 
-      const parkingDurationInHours = (this.departure_time - this.arrival_time) / (1000 * 60 * 60);
+      const assumedDepartureTime = new Date();
+      const parkingDurationInHours = (assumedDepartureTime - slip.arrival_time) / (1000 * 60 * 60);
+      const parkingTotal = parkingDurationInHours * slip.hourlyPrice;
 
-      const parkingTotal = parkingDurationInHours * this.hourly_price;
+
+      // const slipInfo = SlipsService.getSlipBySlipNumber();
+
+      // const parkingDurationInHours = (this.departure_time - this.arrival_time) / (1000 * 60 * 60);
+
+      // const parkingTotal = parkingDurationInHours * this.hourly_price;
 
       return parkingTotal;
-    },
-    created() {
-      let patronID = -1;
-      PatronsService.getPatronIdByUserId(this.$store.state.user.id)
-      .then
     }
   }
 };
