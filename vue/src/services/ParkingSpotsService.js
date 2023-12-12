@@ -14,8 +14,8 @@ export default {
         return axios.get('/parking-spots/isAvailable/parked-cars');
     },
 
-    getParkingSpotByAvailability() {
-        return axios.get('/parking-spots/isAvailable');
+    getParkingSpotByAvailability(isAvailable) {
+        return axios.get('/parking-spots/availability/' + isAvailable);
 
     },
 
@@ -23,3 +23,14 @@ export default {
         return axios.put(`/parking-spots/${spotNumber}`);
     }
 }
+
+// methods: {
+//     fetchCars() {
+//       ParkedCarsInfoService.getParkedCarsInfo()
+//         .then(response => {
+//           this.cars = response.data.map(car => ({ ...car, isFlipped: false }));
+//         })
+//         .catch(error => {
+//           console.error('Error fetching cars:', error);
+//         });
+//     },

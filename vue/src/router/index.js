@@ -2,6 +2,7 @@ import { createRouter as createRouter, createWebHistory } from 'vue-router'
 import { useStore } from 'vuex'
 
 // Import components
+import CustomerParkingAvailability from '../views/CustomerParkingAvailability.vue'
 import ValetRequestPickup from '../views/ValetRequestPickup.vue';
 import CheckInForm from '../views/CheckInForm.vue'
 import Slips from '../views/Slip.vue';
@@ -25,6 +26,14 @@ import ParkedCarsView from '../views/ParkedCarsView.vue';
  * If they have (or don't need to) they're allowed to go about their way.
  */
 const routes = [
+  {
+    path: '/customer-parking-availability',
+    name: 'CustomerParkingAvailability',
+    component: CustomerParkingAvailability,
+    meta: {
+      requiresAuth: true 
+    }
+  },
 
   {
     path: '/parked-cars',

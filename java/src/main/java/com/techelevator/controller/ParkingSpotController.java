@@ -42,7 +42,7 @@ public class ParkingSpotController {
     }
 
     @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/parking-spots/isAvailable/parked-cars")
+    @GetMapping("/parking-spots/{isAvailable}/parked-cars")
 
     public List<ParkingSpots> getParkingSpotsWithCars (@PathVariable boolean isAvailable) {
 
@@ -50,19 +50,19 @@ public class ParkingSpotController {
     }
 
     @PermitAll
-    @GetMapping("/parking-spots/isAvailable")
+    @GetMapping("/parking-spots/availability/{isAvailable}")
     public List<ParkingSpots> getParkingSpotByAvailability (@PathVariable boolean isAvailable) {
 
          return parkingSpotsDao.getParkingSpotByAvailability(isAvailable);
     }
     @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/parking-spots/{carId}")
+    @GetMapping("/parking-spots/cars/{carId}")
     public ParkingSpots getParkingSpotByCarId (@PathVariable int carId){
         return parkingSpotsDao.getParkingSpotByCarId(carId);
     }
 
     @PreAuthorize("hasRole('ROLE_VALET')")
-    @PutMapping("/parking-spots/{spotNumber}")
+    @PutMapping("/parking-spots/spots/{spotNumber}")
     public ParkingSpots updateParkingSpot (@PathVariable int spotNumber, @RequestBody ParkingSpots updatedParkingSpot) {
         updatedParkingSpot.setSpotNumber(spotNumber);
         return parkingSpotsDao.updateParkingSpot(updatedParkingSpot);
