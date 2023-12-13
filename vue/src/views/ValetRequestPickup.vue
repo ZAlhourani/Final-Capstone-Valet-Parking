@@ -2,13 +2,13 @@
   <div class="valet-request-pickup-form">
     <h2>Valet Request Car Pickup</h2>
     <form @submit.prevent="submitValetPickupRequest">
-      <div class="form-group">
-        <label for="car-id">Car ID:</label>
+      <div class="form-group1">
+        <label class="id-label" for="car-id">Car ID:</label>
         <input id="car-id" v-model="pickupRequest.carId" required>
       </div>
 
-      <div class="form-group">
-        <label for="patron-name">Patron Name:</label>
+      <div class="form-group1">
+        <label class="patron-label" for="patron-name">Patron Name:</label>
         <input id="patron-name" v-model="pickupRequest.patronName">
       </div>
 
@@ -82,6 +82,11 @@ export default {
 </script>
 
 <style>
+
+.id-label, .patron-label{
+  color: black;
+  font-weight: 500;
+}
 .valet-request-pickup-form {
   max-width: 500px;
   margin: 0 auto;
@@ -89,6 +94,7 @@ export default {
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
 }
 
 .valet-request-pickup-form h2 {
@@ -131,4 +137,6 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #45a049;
 }
+
+
 </style>

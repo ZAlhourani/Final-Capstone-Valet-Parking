@@ -4,12 +4,6 @@
     <h1>Parked Cars</h1>
     <div class="filters">
       <input v-model="filter" placeholder="Filter cars..." type="text">
-      <select v-model="sortKey" @change="sortCars">
-        <option value="make">Make</option>
-        <option value="model">Model</option>
-        <option value="year">Year</option>
-        <option value="color">Color</option>
-      </select>
     </div>
     <ul class="car-list">
       <li v-for="car in filteredCars" :key="car.id" class="flip-card" @click="flipCard(car)">
@@ -24,7 +18,6 @@
           <div class="flip-card-back">
             <p>Owner: {{ car.name }}</p>
             <p>Phone Number: {{ car.phoneNumber }}</p>
-            <!-- <p>Color: {{ car.color }}</p> -->
             <p>Parking Spot: {{ car.spotNumber }}</p>
           </div>
         </div>
