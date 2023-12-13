@@ -20,8 +20,12 @@
 
 <script>
 import axios from 'axios';
+import SlipsService from '../services/SlipsService';
+import PatronsService from '../services/PatronsService';
+import CarsService from '../services/CarsService';
 
 export default {
+
   data() {
     return {
       pickupRequest: {
@@ -33,8 +37,34 @@ export default {
   methods: {
     async submitValetPickupRequest() {
       try {
-        // Replace with your API endpoint
-        const response = await axios.post('https://your-api-endpoint/valet-pickup-requests', this.pickupRequest);
+        var today = new Date();
+
+        // Convert to ISO 8601 format
+        var isoString = today.toISOString();
+
+        // Remove the milliseconds and timezone information
+        isoString = isoString.slice(0, -5);
+
+        SlipsService.getSlipByCarId(this.pickupRequest.carId).then(data => {
+          let slips = data.data;
+          let slipToUpdate = {};
+          slips.forEach(slip => {
+              if(slip.departureTime === null){
+                slipToUpdate = slip;
+              }
+          });
+
+          slipToUpdate.departureTime = isoString;
+
+          slipToUpdate.patronId.userId.authorities = toString(slipToUpdate.patronId.userId.authorities);
+          slipToUpdate.carId.patronId.userId.authorities = toString(slipToUpdate.carId.patronId.userId.authorities);
+          
+          SlipsService.updateSlip(slipToUpdate.slipNumber, slipToUpdate).finally(()=> {
+              this.pickupData = { location: '', time: '', notes: '' };
+              alert('Your pickup request has been submitted.');
+          });
+        })
+
       } catch (error) {
         console.error('Error submitting valet pickup request:', error);
       }

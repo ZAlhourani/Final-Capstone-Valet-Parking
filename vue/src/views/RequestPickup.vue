@@ -25,6 +25,8 @@
   <script>
   import SlipsService from '../services/SlipsService';
   import PatronsService from '../services/PatronsService';
+  import CarsService from '../services/CarsService';
+
   export default {
     data() {
       return {
@@ -37,8 +39,6 @@
     },
     methods: {
       async submitPickupRequest() {
-        console.log('Pickup request submitted:', this.pickupData);
-
         var pickupTime = this.pickupData.time
         var today = new Date();
         var [hours, minutes] = pickupTime.split(':');
@@ -56,28 +56,29 @@
         // Remove the milliseconds and timezone information
         isoString = isoString.slice(0, -5);
 
-
-        PatronsService.getPatronIdByUserId(this.$store.state.user.id).then(data => {
-
-          data.data.userId.authorities = toString(data.data.userId.authorities);
-
-          console.log(pickupTime);
-            const slip = {
-            patronId: data.data,
-            arrivalTime: isoString,
-            departure_time : '',
-            hourly_price: 5,
-            total: 0
-          };
         
-          SlipsService.createNewSlip(slip);
-        })
-        .finally(() => {
+      PatronsService.getPatronIdByUserId(this.$store.state.user.id).then(data => {
+        SlipsService.getSlipByPatronId(data.data.patronId).then(data => {
+          let slips = data.data;
+          let slipToUpdate = {};
+          slips.forEach(slip => {
+            if(slip.departureTime === null){
+              slipToUpdate = slip;
+            }
+          });
+
+          slipToUpdate.departureTime = isoString;
+
+          // this is hacky and bad but not as bad as userId actually being a whole user object
+          slipToUpdate.patronId.userId.authorities = toString(slipToUpdate.patronId.userId.authorities);
+          slipToUpdate.carId.patronId.userId.authorities = toString(slipToUpdate.carId.patronId.userId.authorities);
+          
+          SlipsService.updateSlip(slipToUpdate.slipNumber, slipToUpdate).finally(()=> {
             this.pickupData = { location: '', time: '', notes: '' };
             alert('Your pickup request has been submitted.');
-          }
-        );
-      
+          });
+        })
+      })
       }
     }
   };

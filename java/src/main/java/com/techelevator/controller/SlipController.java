@@ -21,28 +21,27 @@ public class SlipController {
     public SlipController(SlipsDao slipsDao) {
         this.slipsDao = slipsDao;
     }
-    @PreAuthorize("hasRole('ROLE_VALET')")
+//    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/slips")
     public List<Slips> getAllSlipsList(){
         return slipsDao.getAllSlips();
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
-    @GetMapping("/slips/{slipNumber}")
-    public Slips getSlipBySlipNumber (@PathVariable int slipNumber) {
-        Slips result = slipsDao.getSlipBySlipNumber(slipNumber);
-        if (result == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
-        } else {
-            return result;
-        }
-    }
+   @PreAuthorize("hasRole('ROLE_VALET')")
+   @GetMapping("/slips/{slipNumber}")
+   public Slips getSlipBySlipNumber (@PathVariable int slipNumber) {
+       Slips result = slipsDao.getSlipBySlipNumber(slipNumber);
+       if (result == null) {
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
+       } else {
+           return result;
+       }
+   }
 
 //    @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/slips/patrons/{patronId}")
     public List<Slips> getSlipsByPatronId (@PathVariable int patronId){
         List<Slips> result = slipsDao.getSlipByPatronId(patronId);
-
         if (result == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
         } else {
@@ -52,8 +51,8 @@ public class SlipController {
 
     @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/slips/cars/{carId}")
-    public Slips getSlipByCarId (@PathVariable int carId){
-        Slips result = slipsDao.getSlipByCarId(carId);
+    public List<Slips> getSlipByCarId (@PathVariable int carId){
+        List<Slips> result = slipsDao.getSlipByCarId(carId);
 
         if (result == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No slip with that number.");
@@ -68,7 +67,7 @@ public class SlipController {
         return slipsDao.createNewSlip(newSlip);
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
+//    @PreAuthorize("hasRole('ROLE_VALET')")
     @PutMapping("/slips/{slipNumber}")
     public Slips updateSlip (@PathVariable int slipNumber, @RequestBody Slips updatedSlip) {
         updatedSlip.setSlipNumber(slipNumber);

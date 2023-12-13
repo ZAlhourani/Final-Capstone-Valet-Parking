@@ -31,8 +31,8 @@ public class ParkedCarsInfoDtoController {
 
     }
 
-//        ParkedCarsInfoDto parkedCarInfo = new ParkedCarsInfoDto();
-//
+        ParkedCarsInfoDto parkedCarInfo = new ParkedCarsInfoDto();
+
 //        parkedCarInfo.setMake(parkedCarsInfoDto.getMake());
 //        parkedCarInfo.setModel(parkedCarsInfoDto.getModel());
 //        parkedCarInfo.setColor(parkedCarsInfoDto.getColor());
@@ -44,6 +44,6 @@ public class ParkedCarsInfoDtoController {
 //        parkedCarInfo.setTotal(parkedCarsInfoDto.getTotal());
 //
 //        return parkedCarInfo;
-//
-//    }
+
+  //  }
 }
