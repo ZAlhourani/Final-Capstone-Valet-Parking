@@ -44,7 +44,11 @@
       </div>
       <div class="form-group">
         <label for="spot-number">Spot Number:</label>
-        <input id="spot-number" v-model="spotNumber" required>
+        <select v-model="spotNumber" id="spots-dropdown" class="dropdown-boxes">
+          <option v-for="oneSpot in parkingSpotsDropdown" :key="oneSpot.spotNumber" :value="oneSpot.spotNumber">
+            {{ oneSpot.spotNumber }}
+          </option>
+        </select>
       </div>
       <button type="submit">Check-In</button>
     </form>
@@ -52,7 +56,8 @@
 </template>
 <script>
 import CheckInDtoService from '../services/CheckInDtoService';
-import PatronsService from '../services/PatronsService'
+import PatronsService from '../services/PatronsService';
+import ParkingSpotsService from '../services/ParkingSpotsService';
 
 export default {
   data() {
@@ -71,10 +76,20 @@ export default {
       arrivalTime: '',
       spotNumber: '',
       patronDropdown: [],
+      parkingSpotsDropdown: [],
       selectedPatron: null,
     };
   },
   methods: {
+    getAvailableSpots(){
+      ParkingSpotsService.getParkingSpotByAvailability(true)
+      .then(response =>{
+        this.parkingSpotsDropdown = response.data;
+      })
+      .catch(error=>{
+        console.error('Error getting available parking spots;',error);
+      });
+    },
     setPatronName(){
       let foundPatron = this.patronDropdown.find(item => item.phoneNumber.trim() == this.patron.phoneNumber.trim());
       this.patron.name = foundPatron.name;
@@ -150,6 +165,7 @@ export default {
   },
   mounted() {
     this.getPatronDropdown();
+    this.getAvailableSpots();
   },
 };
 </script>
