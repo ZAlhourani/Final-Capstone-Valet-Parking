@@ -52,8 +52,12 @@ export default {
     };
   },
   methods: {
+
+    clearSecretCode(){
+      this.user.code = '';
+    },
     register() {
-      if (this.user.password != this.user.confirmPassword) {
+      if ((this.user.password != this.user.confirmPassword) && (this.user.code == '1234')) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
@@ -65,6 +69,7 @@ export default {
                 path: '/login',
                 query: { registration: 'success' },
               });
+              // this.clearSecretCode();
             }
           })
           .catch((error) => {

@@ -30,7 +30,8 @@ public class JdbcParkedCarsInfoDao implements ParkedCarsInfoDtoDao {
                 "from parking_spots " +
                 "join cars using (car_id) " +
                 "join patrons using (patron_id) " +
-                "join slips using (patron_id) " +
+                "join slips using (patron_id,car_id) " +
+                "where is_available is false and departure_time is null " +
                 "order by spot_number ASC;";
 
         try {

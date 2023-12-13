@@ -134,7 +134,7 @@ export default {
           console.log('Check-in successful', response);
           alert('Check-in successful');
           this.clearForm();
-
+          location.reload();
         })
         .catch(error => {
           console.error('An error occurred during form submission', error);
@@ -185,8 +185,9 @@ h2 {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.form-group {
+.form-group label {
   margin-bottom: 15px;
+color: white;
 }
 
 label {
