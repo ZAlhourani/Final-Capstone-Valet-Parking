@@ -26,13 +26,13 @@
       </tbody>
     </table>
   </div>
-   <button type="submit" v-on:click="submitCarPickUp">Request Pickup</button>
-  <!-- <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login'">Request a Pickup</router-link> -->
+  <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login' && $store.state.user.authorities[0].name === 'ROLE_USER'">Request a Pickup</router-link>
+  <router-link v-bind:to="{ name: 'valet-request-pickup' }" v-show="$route.name !== 'login' && $store.state.user.authorities[0].name === 'ROLE_VALET'">Request a Pickup</router-link>
 </template>
 
 <script>
 import SlipsService from '../services/SlipsService';
-import CheckInDtoService from '../services/CheckInDtoService';
+import PatronsService from '../services/PatronsService';
 
 export default {
   data() {
@@ -43,28 +43,23 @@ export default {
     };
   },
   created() {
+    console.log(this.$store.state.user)
+
     if ( this.$store.state.user.authorities[0].name === 'ROLE_USER') {
       
       PatronsService.getPatronIdByUserId(this.$store.state.user.id).then(data => {
         SlipsService.getSlipByPatronId(data.data.patronId).then(data => {
           this.slips = data.data;
+          
         })
       })
-    //  SlipsService.getSlipsByPatronId()
-    // } else {
+    } else {
       SlipsService.getAllSlipsList().then(data => {
         this.slips = data.data;
       });
     }
     },
   methods: {
-
-    submitCarPickUp(slip) {
-      CheckInDtoService.checkOut(slip) 
-      .then(response => {
-        this.slips = response.data;
-      })
-    },
 
     formatTime(time) {
       if (!time) return 'N/A';
