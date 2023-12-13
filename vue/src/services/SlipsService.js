@@ -23,8 +23,8 @@ export default {
         return axios.post('/slips', newSlip);
     },
 
-    updateSlip(slipNumber) {
-        return axios.put(`/slips/${slipNumber}`);
+    updateSlip(slipNumber, slip) {
+        return axios.put(`/slips/${slipNumber}`, slip);
     }
 
 

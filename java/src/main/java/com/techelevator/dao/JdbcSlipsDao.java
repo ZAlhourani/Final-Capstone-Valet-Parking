@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class JdbcSlipsDao implements SlipsDao {
 
@@ -86,17 +87,17 @@ public class JdbcSlipsDao implements SlipsDao {
 
 
     @Override
-    public Slips getSlipByCarId(int carId) {
+    public List<Slips> getSlipByCarId(int carId) {
 
-        Slips slip = new Slips();
+        List<Slips> slip = new ArrayList<Slips>();
 
         String sql = "select * from slips where car_id = ?;";
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, carId);
 
-            if (results.next()) {
-                slip = mapRowToSlips(results);
+            while (results.next()) {
+                slip.add( mapRowToSlips(results)) ;
             }
         }catch (CannotGetJdbcConnectionException e){
             throw new DaoException("Unable to connect to server or database", e);
@@ -135,8 +136,8 @@ public class JdbcSlipsDao implements SlipsDao {
                 "departure_time =?, hourly_price = ?, total = ? where slip_number = ?;";
 
         try{
-            int numberOfRowsAffected = jdbcTemplate.update(sql, slip.getPatronId(), slip.getCarId(),
-                    slip.getArrivalTime(), slip.getDepartureTime(), slip.getHourlyPrice(), slip.getTotal());
+            int numberOfRowsAffected = jdbcTemplate.update(sql, slip.getPatronId().getPatronId(), slip.getCarId().getCarId(),
+                    slip.getArrivalTime(), slip.getDepartureTime(), slip.getHourlyPrice(), slip.getTotal(), slip.getSlipNumber());
 
             if(numberOfRowsAffected == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");

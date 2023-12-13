@@ -32,7 +32,7 @@ public class CarController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_VALET')")
+   // @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/cars/patron/{patronId}")
     public Cars getCarByPatronId (@PathVariable int patronId){
         Cars result = carsDao.getCarByPatronId(patronId);
