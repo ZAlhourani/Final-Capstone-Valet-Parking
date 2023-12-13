@@ -24,11 +24,19 @@
       </div>
       <div class="form-group">
         <label for="patron-name">Patron Name:</label>
-        <input id="patron-name" v-model="patron.name" required>
+        <select v-model="patron.name" id="name-dropdown" class="dropdown-boxes">
+          <option v-for="onePatron in patronDropdown" :key="onePatron.patronId" :value="onePatron.name">
+            {{ onePatron.name }}
+          </option>
+        </select>
       </div>
       <div class="form-group">
         <label for="patron-phone">Patron Phone Number:</label>
-        <input id="patron-phone" v-model="patron.phoneNumber" required type="tel">
+        <select v-model="patron.phoneNumber" id="phone-dropdown" class="dropdown-boxes">
+          <option v-for="onePatron in patronDropdown" :key="onePatron.patronId" :value="onePatron.phoneNumber">
+            {{ onePatron.phoneNumber }}
+          </option>
+        </select>
       </div>
       <div class="form-group">
         <label for="arrival-time">Arrival Time:</label>
@@ -44,6 +52,7 @@
 </template>
 <script>
 import CheckInDtoService from '../services/CheckInDtoService';
+import PatronsService from '../services/PatronsService'
 
 export default {
   data() {
@@ -61,14 +70,35 @@ export default {
       },
       arrivalTime: '',
       spotNumber: '',
+      patronDropdown: [],
+      selectedOption: null,
     };
   },
   methods: {
+
+    getPatronDropdown() {
+
+      PatronsService.getAllPatrons()
+        .then(response => {
+          this.patronDropdown = response.data;
+        })
+        .catch(error => {
+          console.error('Error getting customer dropdown options:', error);
+        });
+    },
+
+
     submitForm() {
       if (!this.validateForm()) {
         alert('Please fill all the fields correctly.');
         return;
       }
+
+      const selectedPatron = this.patronDropdown.find(patron => patron.patronId === this.selectedOption);
+
+      this.patron.name = selectedPatron.name;
+      this.patron.phoneNumber = selectedPatron.phoneNumber;
+
       const carCheckInData = {
         ...this.car,
         ...this.patron,
@@ -80,6 +110,7 @@ export default {
           console.log('Check-in successful', response);
           alert('Check-in successful');
           this.clearForm();
+
         })
         .catch(error => {
           console.error('An error occurred during form submission', error);
@@ -103,38 +134,59 @@ export default {
     },
     validateForm() {
       return this.car.make && this.car.model && this.car.color &&
-             this.car.licensePlate && this.car.vinNumber &&
-             this.patron.name && this.patron.phoneNumber &&
-             this.arrivalTime && this.spotNumber;
+        this.car.licensePlate && this.car.vinNumber &&
+        this.patron.name && this.patron.phoneNumber &&
+        this.arrivalTime && this.spotNumber;
     }
-  }
+  },
+  mounted() {
+    this.getPatronDropdown();
+  },
 };
 </script>
-  <style>
+<style>
 label {
   font-size: 1.2rem;
   color: #fff;
   margin-bottom: 0.5rem;
   display: block;
 }
- h2 {
+
+h2 {
   font-size: 2.5rem;
   text-align: center;
   color: #fff;
   margin-bottom: 1.5rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-  .form-group {
-    margin-bottom: 15px;
-  }
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  </style>
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+option {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+select.dropdown-boxes {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+</style>
