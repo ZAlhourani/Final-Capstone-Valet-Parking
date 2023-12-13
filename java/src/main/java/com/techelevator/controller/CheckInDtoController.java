@@ -70,7 +70,7 @@ public class CheckInDtoController {
     @PutMapping("/check-out")
     public Slips checkOutCar(@RequestBody Slips slip){
 
-        ParkingSpots newParkingSpot = new ParkingSpots();
+        ParkingSpots newParkingSpot = parkingSpotsDao.getParkingSpotByCarId(slip.getCarId().getCarId());
 
         if (!newParkingSpot.isAvailable()) {
             newParkingSpot.setCarId(null);

@@ -21,7 +21,7 @@
           <td>{{ slip.arrivalTime }}</td>
           <td>{{ slip.departureTime }}</td>
           <td>{{ slip.hourlyPrice }}</td>
-          <td>{{ total(slip) }}</td>
+          <td>${{ total(slip) }}</td>
         </tr>
       </tbody>
     </table>
@@ -72,7 +72,7 @@ export default {
       }
 
       const assumedDepartureTime = new Date();
-      const parkingDurationInHours = (assumedDepartureTime - slip.arrival_time) / (1000 * 60 * 60);
+      const parkingDurationInHours = (assumedDepartureTime - new Date(slip.arrivalTime)) / (1000 * 60 * 60);
       const parkingTotal = parkingDurationInHours * slip.hourlyPrice;
 
       // const slipInfo = SlipsService.getSlipBySlipNumber();
@@ -81,7 +81,7 @@ export default {
 
       // const parkingTotal = parkingDurationInHours * this.hourly_price;
 
-      return parkingTotal;
+      return parkingTotal.toFixed(2);
     }
   }
 };
