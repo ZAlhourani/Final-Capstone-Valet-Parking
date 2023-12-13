@@ -25,7 +25,7 @@
   <script>
   import SlipsService from '../services/SlipsService';
   import PatronsService from '../services/PatronsService';
-  import CarsService from '../services/CarsService';
+  import CheckInDtoService from '../services/CheckInDtoService';
 
   export default {
     data() {
@@ -38,6 +38,12 @@
       };
     },
     methods: {
+      total(slip) {
+      const parkingDurationInHours = (new Date(slip.departureTime) - new Date(slip.arrivalTime)) / (1000 * 60 * 60);
+      const parkingTotal = parkingDurationInHours * slip.hourlyPrice;
+
+      return parkingTotal;
+    },
       async submitPickupRequest() {
         var pickupTime = this.pickupData.time
         var today = new Date();
@@ -67,16 +73,22 @@
             }
           });
 
-          slipToUpdate.departureTime = isoString;
+          slipToUpdate.departureTime = today;
+          slipToUpdate.total = this.total(slipToUpdate);
 
           // this is hacky and bad but not as bad as userId actually being a whole user object
           slipToUpdate.patronId.userId.authorities = toString(slipToUpdate.patronId.userId.authorities);
           slipToUpdate.carId.patronId.userId.authorities = toString(slipToUpdate.carId.patronId.userId.authorities);
           
-          SlipsService.updateSlip(slipToUpdate.slipNumber, slipToUpdate).finally(()=> {
+          // SlipsService.updateSlip(slipToUpdate.slipNumber, slipToUpdate).finally(()=> {
+          //   this.pickupData = { location: '', time: '', notes: '' };
+          //   alert('Your pickup request has been submitted.');
+          // });
+          CheckInDtoService.checkOut(slipToUpdate).finally(()=> {
             this.pickupData = { location: '', time: '', notes: '' };
             alert('Your pickup request has been submitted.');
           });
+          
         })
       })
       }
