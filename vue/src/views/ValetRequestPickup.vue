@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="valet-request-pickup-form">
     <h2>Valet Request Car Pickup</h2>
     <form @submit.prevent="submitValetPickupRequest">
