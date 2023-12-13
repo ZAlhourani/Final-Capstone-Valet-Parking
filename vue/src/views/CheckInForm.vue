@@ -24,7 +24,7 @@
       </div>
       <div class="form-group">
         <label for="patron-name">Patron Name:</label>
-        <select v-model="patron.name" id="name-dropdown" class="dropdown-boxes">
+        <select @change="setPatronPhoneNumber" v-model="patron.name" id="name-dropdown" class="dropdown-boxes">
           <option v-for="onePatron in patronDropdown" :key="onePatron.patronId" :value="onePatron.name">
             {{ onePatron.name }}
           </option>
@@ -32,7 +32,7 @@
       </div>
       <div class="form-group">
         <label for="patron-phone">Patron Phone Number:</label>
-        <select v-model="patron.phoneNumber" id="phone-dropdown" class="dropdown-boxes">
+        <select @change="setPatronName" v-model="patron.phoneNumber" id="phone-dropdown" class="dropdown-boxes">
           <option v-for="onePatron in patronDropdown" :key="onePatron.patronId" :value="onePatron.phoneNumber">
             {{ onePatron.phoneNumber }}
           </option>
@@ -71,10 +71,19 @@ export default {
       arrivalTime: '',
       spotNumber: '',
       patronDropdown: [],
-      selectedOption: null,
+      selectedPatron: null,
     };
   },
   methods: {
+    setPatronName(){
+      let foundPatron = this.patronDropdown.find(item => item.phoneNumber.trim() == this.patron.phoneNumber.trim());
+      this.patron.name = foundPatron.name;
+    },
+
+    setPatronPhoneNumber() {
+      let foundPatron = this.patronDropdown.find(item => item.name.trim() == this.patron.name.trim());
+      this.patron.phoneNumber = foundPatron.phoneNumber;
+    },
 
     getPatronDropdown() {
 
@@ -94,10 +103,10 @@ export default {
         return;
       }
 
-      const selectedPatron = this.patronDropdown.find(patron => patron.patronId === this.selectedOption);
+      // const selectedPatron = this.patronDropdown.find(patron => patron.patronId === this.selectedPatron);
 
-      this.patron.name = selectedPatron.name;
-      this.patron.phoneNumber = selectedPatron.phoneNumber;
+      // this.patron.name = selectedPatron.name;
+      // this.patron.phoneNumber = selectedPatron.phoneNumber;
 
       const carCheckInData = {
         ...this.car,
