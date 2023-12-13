@@ -39,7 +39,7 @@ public class ParkedCarDetailsController {
         carDetails.setVinNumber(carsDao.getCarByCarId(carId).getVinNumber());
         carDetails.setName(carsDao.getCarByCarId(carId).getPatronId().getName());
         carDetails.setPhoneNumber(carsDao.getCarByCarId(carId).getPatronId().getPhoneNumber());
-        carDetails.setTotal(slipsDao.getSlipByCarId(carId).getTotal());
+//        carDetails.setTotal(slipsDao.getSlipByCarId(carId).getTotal());
 
         return carDetails;
     }
