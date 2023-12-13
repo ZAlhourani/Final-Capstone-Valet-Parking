@@ -49,13 +49,13 @@ export default {
       
       PatronsService.getPatronIdByUserId(this.$store.state.user.id).then(data => {
         SlipsService.getSlipByPatronId(data.data.patronId).then(data => {
-          this.slips = data.data;
+          this.slips = data.data.reverse();
           
         })
       })
     } else {
       SlipsService.getAllSlipsList().then(data => {
-        this.slips = data.data;
+        this.slips = data.data.reverse();
       });
     }
     },
