@@ -44,7 +44,7 @@ export default {
         username: '',
         password: '',
         confirmPassword: '',
-        code: '1234',
+        code: '',
         role: 'valet',
       },
       registrationErrors: false,

@@ -4,6 +4,9 @@
     <h1>Servizio di Auto</h1>
 
     <p>The current temperature in Pittsburgh is {{ current.current.temperature_2m }}{{ current.current_units.temperature_2m }}</p>
+    <p class="description">
+      Welcome to "Servizio di Auto," Ristorante Stravagante's premier valet service application, where Milanese flair meets modern convenience. Experience the blend of traditional Italian hospitality and modern efficiency.
+    </p>
   </div>
 </template>
 
@@ -80,6 +83,18 @@ export default {
 </script>
 
 <style>
+p.description {
+  color: #e1e1e1; 
+  font-size: 1rem;
+  margin-top: 1em;
+  padding: 0 2em; /* Adds padding on the sides for better readability */
+  border-top: 2px solid #bb29eb; /* Adds a stylistic line above the description */
+  border-bottom: 2px solid #bb29eb; /* Adds a stylistic line below the description */
+  background-color: rgba(187, 41, 235, 0.1); /* Slight purple background for the description box */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  border-radius: 5px; /* Rounded corners for the description box */
+}
+
 .home {
   height: 100vh;
   width: 100vw;
