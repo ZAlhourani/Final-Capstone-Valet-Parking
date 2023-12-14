@@ -4,7 +4,10 @@
     <p v-if="loading">Loading...</p>
     <div v-else>
       <p v-if="spaces.length > 0">We have {{ spaces.length }} spots available.</p>
-      <div v-else class="alert alert-full">Lot is full</div>
+      <div v-else class="alert alert-full">
+        Lot is full
+        <font-awesome-icon :icon="['far', 'face-frown']" />      
+      </div>
     </div>
   </div>
 </template>
