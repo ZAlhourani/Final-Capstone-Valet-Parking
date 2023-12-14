@@ -10,8 +10,8 @@
 
     <p class="description">Welcome to Servizio di Auto, where unparalleled luxury meets culinary excellence. As an integral part of our Michelin-starred Italian haven, our bespoke valet service is designed to elevate every aspect of your dining experience.</p>
 <p class="p2">Step into a world of sophistication and seamless hospitality as our valet attendants cater to your every need, ensuring a smooth and elegant arrival. Our commitment to excellence extends beyond the culinary realm, reflecting the same dedication to refinement that has earned our restaurant its prestigious Michelin star.</p>
-<p class="p3">Indulge in the convenience of our valet services, where attention to detail is paramount. From the moment you entrust us with your vehicle, rest assured that it will be handled with the utmost care and professionalism. Our valet team is here to create a seamless transition from the bustling world outside to the tranquil ambiance within.</p>
-<p class="p4">At Servizio di Auto, we believe that every element contributes to a truly extraordinary dining experience. Allow us to set the stage for an evening of gastronomic delight, complemented by the luxury and sophistication that define our Michelin-starred Italian restaurant.</p>
+<!-- <p class="p3">Indulge in the convenience of our valet services, where attention to detail is paramount. From the moment you entrust us with your vehicle, rest assured that it will be handled with the utmost care and professionalism. Our valet team is here to create a seamless transition from the bustling world outside to the tranquil ambiance within.</p>
+<p class="p4">At Servizio di Auto, we believe that every element contributes to a truly extraordinary dining experience. Allow us to set the stage for an evening of gastronomic delight, complemented by the luxury and sophistication that define our Michelin-starred Italian restaurant.</p> -->
 <p class="p5">Experience the epitome of service and style – both on your plate and in our valet services. Welcome to Servizio di Auto, where luxury is not just a service; it's an integral part of our culinary narrative.</p>
 <p class="temp">The current temperature in Pittsburgh is {{ current.current.temperature_2m }}{{ current.current_units.temperature_2m }}</p>
   </div>
@@ -157,7 +157,7 @@ p {
 
 .description{
   margin: 40px;
-  font-size: 20px;
+  font-size: 25px;
   line-height: 1.5;
   color: white; 
   margin-bottom: 15px; 
@@ -166,7 +166,7 @@ p {
 
 .p2, .p3, .p4, .p5{
   margin: 40px;
-  font-size: 20px;
+  font-size: 25px;
   line-height: 1.5;
   color: white; 
   margin-bottom: 15px; 
