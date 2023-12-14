@@ -112,7 +112,6 @@ label {
 #register{
   font-size: 30px;
   font-style: italic;
-  /* padding-bottom: 300px; */
   margin-top: 20px;
   color: rgb(130, 2, 251);
   text-shadow: 0 0 10px rgba(130, 2, 251, 1);
