@@ -52,23 +52,5 @@ export default {
 </script>
 <style>
 
-#nav {
-  background-color: #333; 
-  padding: 10px 20px; 
-  text-align: center; 
-}
-
-#nav a {
-  color: #fff; 
-  text-decoration: none; 
-  padding: 5px 10px; 
-  transition: background-color 0.3s, color 0.3s; 
-}
-
-#nav a:hover {
-  background-color: #bb29eb; 
-   color: lightpink;  
-  border-radius: 4px; 
-}
 
 </style>

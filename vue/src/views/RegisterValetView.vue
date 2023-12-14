@@ -94,21 +94,32 @@ export default {
   margin-bottom: 1rem;
   text-align: center;
 }
-#AdminNav {
+#userNav, #AdminNav {
   visibility: visible;
-  color: azure; 
+  color: azure;
   font-size: 25px;
   border: 2px solid #BB29EB;
-  background-color: rgb(3, 3, 3);
-  
+  background-color: rgba(3, 3, 3, 0.9); 
+  backdrop-filter: blur(5px); 
+  padding: 10px 20px; 
+  margin: 10px; 
+  border-radius: 5px; 
+  box-shadow: 0 0 10px #BB29EB; 
+  text-shadow: 0 0 5px #BB29EB; 
+  transition: all 0.3s ease; 
 }
+
+#userNav:hover, #AdminNav:hover {
+  box-shadow: 0 0 15px #BB29EB, 0 0 25px #BB29EB; 
+  transform: translateY(-2px);
+}
+
 label {
   margin-right: 0.5rem;
 }
 #register{
   font-size: 30px;
   font-style: italic;
-  /* padding-bottom: 300px; */
   margin-top: 20px;
   color: rgb(130, 2, 251);
   text-shadow: 0 0 10px rgba(130, 2, 251, 1);

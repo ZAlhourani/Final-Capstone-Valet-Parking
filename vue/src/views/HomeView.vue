@@ -87,6 +87,18 @@ export default {
 </script>
 
 <style>
+p.description {
+  color: #e1e1e1; 
+  font-size: 1rem;
+  margin-top: 1em;
+  padding: 0 2em; /* Adds padding on the sides for better readability */
+  border-top: 2px solid #bb29eb; /* Adds a stylistic line above the description */
+  border-bottom: 2px solid #bb29eb; /* Adds a stylistic line below the description */
+  background-color: rgba(187, 41, 235, 0.1); /* Slight purple background for the description box */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  border-radius: 5px; /* Rounded corners for the description box */
+}
+
 .home {
   height: 100vh;
   width: 100vw;
@@ -97,13 +109,32 @@ export default {
   justify-content: center;
   text-align: center;
 }
-#userNav {
+/* #userNav {
   visibility: visible;
   color: azure; 
   font-size: 25px;
   border: 2px solid #BB29EB;
   background-color: rgb(3, 3, 3);
+} */
+
+/* #nav {
+  background-color: #333; 
+  padding: 10px 20px; 
+  text-align: center; 
+} */
+
+/* #nav a {
+  color: #fff; 
+  text-decoration: none; 
+  padding: 5px 10px; 
+  transition: background-color 0.3s, color 0.3s; 
 }
+
+#nav a:hover {
+  background-color: #bb29eb; 
+   color: lightpink;  
+  border-radius: 4px; 
+} */
 
 h1 {
   color: #bb29eb; 

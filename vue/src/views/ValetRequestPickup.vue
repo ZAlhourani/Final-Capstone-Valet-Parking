@@ -46,10 +46,8 @@ export default {
       try {
         var today = new Date();
 
-        // Convert to ISO 8601 format
         var isoString = today.toISOString();
 
-        // Remove the milliseconds and timezone information
         isoString = isoString.slice(0, -5);
 
         SlipsService.getSlipByCarId(this.pickupRequest.carId).then(data => {
