@@ -69,19 +69,13 @@ export default {
 
     total(slip) {
       
-      if (slip.departureTime != null ) { // user already picked it up
+      if (slip.departureTime != null ) { 
         return slip.total;
       }
 
       const assumedDepartureTime = new Date();
       const parkingDurationInHours = (assumedDepartureTime - new Date(slip.arrivalTime)) / (1000 * 60 * 60);
       const parkingTotal = parkingDurationInHours * slip.hourlyPrice;
-
-      // const slipInfo = SlipsService.getSlipBySlipNumber();
-
-      // const parkingDurationInHours = (this.departure_time - this.arrival_time) / (1000 * 60 * 60);
-
-      // const parkingTotal = parkingDurationInHours * this.hourly_price;
 
       return parkingTotal.toFixed(2);
     }

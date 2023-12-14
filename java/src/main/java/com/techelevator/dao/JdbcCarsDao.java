@@ -132,8 +132,6 @@ public class JdbcCarsDao implements CarsDao {
         car.setColor(results.getString("color"));
         car.setLicensePlate(results.getString("license_plate"));
         car.setVinNumber(results.getString("vin_number"));
-//        car.setOwnerContact(results.getString("owner_contact"));
-//        car.setOwnerName(results.getString("owner_name"));
 
         int carPatronId = results.getInt("patron_id");
         Patrons patronId = patronsDao.getPatronById(carPatronId);

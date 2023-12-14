@@ -104,7 +104,6 @@ html{
   text-align: center;
 }
 body{
-  /* color: azure; */
   display: flex;
   justify-content: center;
 }

@@ -58,8 +58,7 @@ export default {
       const spotsPerRow = 5;
       let index = 0;
 
-      // Assuming your cars array is already populated and sorted
-      // as necessary (it might be part of your fetchCars method)
+     
       const sortedCars = this.filteredCars;
 
       while (index < sortedCars.length) {
@@ -105,7 +104,7 @@ export default {
 <style scoped>
 h1 {
   text-align: center;
-  /* color: #333; */
+  
 }
 
 .filters {

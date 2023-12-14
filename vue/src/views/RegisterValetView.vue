@@ -69,7 +69,6 @@ export default {
                 path: '/login',
                 query: { registration: 'success' },
               });
-              // this.clearSecretCode();
             }
           })
           .catch((error) => {

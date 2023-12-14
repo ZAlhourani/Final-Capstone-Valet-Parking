@@ -30,20 +30,4 @@ public class ParkedCarsInfoDtoController {
         return parkedCarsInfoDtoDao.getParkedCarsInfo();
 
     }
-
-        ParkedCarsInfoDto parkedCarInfo = new ParkedCarsInfoDto();
-
-//        parkedCarInfo.setMake(parkedCarsInfoDto.getMake());
-//        parkedCarInfo.setModel(parkedCarsInfoDto.getModel());
-//        parkedCarInfo.setColor(parkedCarsInfoDto.getColor());
-//        parkedCarInfo.setLicensePlate(parkedCarsInfoDto.getLicensePlate());
-//        parkedCarInfo.setVinNumber(parkedCarsInfoDto.getVinNumber());
-//        parkedCarInfo.setName(parkedCarsInfoDto.getName());
-//        parkedCarInfo.setPhoneNumber(parkedCarsInfoDto.getPhoneNumber());
-//        parkedCarInfo.setSpotNumber(parkedCarsInfoDto.getSpotNumber());
-//        parkedCarInfo.setTotal(parkedCarsInfoDto.getTotal());
-//
-//        return parkedCarInfo;
-
-  //  }
 }
