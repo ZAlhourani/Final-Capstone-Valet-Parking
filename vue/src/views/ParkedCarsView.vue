@@ -33,7 +33,7 @@ export default {
     return {
       cars: [],
       filter: '',
-      sortKey: 'make'
+      sortKey: 'spotNumber'
     };
   },
   computed: {
@@ -52,6 +52,22 @@ export default {
         );
       }
       return filtered.sort((a, b) => (a[this.sortKey] > b[this.sortKey] ? 1 : -1));
+    },
+    formattedCars() {
+      let rows = [];
+      const spotsPerRow = 5;
+      let index = 0;
+
+      // Assuming your cars array is already populated and sorted
+      // as necessary (it might be part of your fetchCars method)
+      const sortedCars = this.filteredCars;
+
+      while (index < sortedCars.length) {
+        rows.push(sortedCars.slice(index, index + spotsPerRow));
+        index += spotsPerRow;
+      }
+
+      return rows;
     }
   },
   methods: {
@@ -114,17 +130,19 @@ h1 {
 
 .car-list {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 20px;
+  align-items: start;
   padding: 10px;
   list-style-type: none;
   margin: 0;
 }
 
+
 .car-list li {
-  flex: 0 0 calc(50% - 40px);
-  margin: 20px;
+  flex: 0 0 18%;  
+  margin-bottom: 20px; 
   perspective: 1000px;
   height: 200px;
 }
