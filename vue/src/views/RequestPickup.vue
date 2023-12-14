@@ -49,17 +49,14 @@
         var today = new Date();
         var [hours, minutes] = pickupTime.split(':');
 
-        // Set the hours and minutes of the Date object
         today.setHours(hours, minutes, 0, 0);
         if (today < new Date()) {
-          // If yes, set it to tomorrow
+        
           today.setDate(today.getDate() + 1);
         }
 
-        // Convert to ISO 8601 format
         var isoString = today.toISOString();
 
-        // Remove the milliseconds and timezone information
         isoString = isoString.slice(0, -5);
 
         
@@ -76,14 +73,10 @@
           slipToUpdate.departureTime = today;
           slipToUpdate.total = this.total(slipToUpdate);
 
-          // this is hacky and bad but not as bad as userId actually being a whole user object
           slipToUpdate.patronId.userId.authorities = toString(slipToUpdate.patronId.userId.authorities);
           slipToUpdate.carId.patronId.userId.authorities = toString(slipToUpdate.carId.patronId.userId.authorities);
           
-          // SlipsService.updateSlip(slipToUpdate.slipNumber, slipToUpdate).finally(()=> {
-          //   this.pickupData = { location: '', time: '', notes: '' };
-          //   alert('Your pickup request has been submitted.');
-          // });
+         
           CheckInDtoService.checkOut(slipToUpdate).finally(()=> {
             this.pickupData = { location: '', time: '', notes: '' };
             alert('Your pickup request has been submitted.');

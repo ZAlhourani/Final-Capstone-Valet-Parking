@@ -56,8 +56,8 @@ export default {
           console.log('Parking spots data:', response.data);
 
           this.parkingSpots = response.data.map(spot => ({
-            spotNumber: spot.spotNumber, // Make sure this matches the key in the response
-            isAvailable: spot.available // Make sure this matches the key in the response and is a boolean
+            spotNumber: spot.spotNumber, 
+            isAvailable: spot.available 
           }));
 
           this.parkingSpots.forEach((spot, index) => {

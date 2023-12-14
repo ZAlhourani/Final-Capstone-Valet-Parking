@@ -60,7 +60,6 @@ public class CheckInDtoController {
         }
 
         newSlip.setArrivalTime(checkInDto.getArrivalTime());
-//        newSlip.setDepartureTime(LocalDateTime.now());
         newSlip.setPatronId(patronsDao.getPatronByPhoneNumber(checkInDto.getPhoneNumber()));
         newSlip.setCarId(newCar);
         newSlip = slipsDao.createNewSlip(newSlip);
