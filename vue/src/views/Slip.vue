@@ -26,8 +26,10 @@
       </tbody>
     </table>
   </div>
+  <div class="links">
   <router-link v-bind:to="{ name: 'request-pickup' }" v-show="$route.name !== 'login' && $store.state.user.authorities[0].name === 'ROLE_USER'">Request a Pickup</router-link>
   <router-link v-bind:to="{ name: 'valet-request-pickup' }" v-show="$route.name !== 'login' && $store.state.user.authorities[0].name === 'ROLE_VALET'">Request a Pickup</router-link>
+</div>
 </template>
 
 <script>
@@ -109,6 +111,10 @@ td {
 
 th {
   background-color: #f4f4f4;
+}
+
+.links {
+  font-size: 25px;
 }
 </style>
 
