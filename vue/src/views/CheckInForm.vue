@@ -4,7 +4,12 @@
     <form @submit.prevent="submitForm">
       <div class="form-group">
         <label for="make">Car Make:</label>
-        <input id="make" v-model="car.make" required>
+        <select v-model="car.make" id="car-dropdown" class="dropdown-boxes">
+          <option v-for="carMake in carMakeList" :key="carMake.indexOf" :value="carMake">
+            {{ carMake }}
+          </option>
+        </select>
+        <!-- <input id="make" v-model="car.make" required> -->
       </div>
       <div class="form-group">
         <label for="model">Car Model:</label>
@@ -62,6 +67,62 @@ import ParkingSpotsService from '../services/ParkingSpotsService';
 export default {
   data() {
     return {
+      carMakeList: [
+        'Alfa Romeo',
+        'Aston Martin',
+        'Audi',
+        'BMW',
+        'Bently',
+        'Bugatti',
+        'Buick',
+        'Cadillac',
+        'Chevrolet',
+        'Chrysler',
+        'Dodge',
+        'Ferrari',
+        'Ford',
+        'GM',
+        'GEM',
+        'Genesis',
+        'GMC',
+        'Honda',
+        'Hummer',
+        'Hyundai',
+        'Infiniti',
+        'Isuzu',
+        'Jaguar',
+        'Jeep',
+        'Kia',
+        'Lamborghini',
+        'Land Rover',
+        'Lexus',
+        'Lincoln',
+        'Lotus',
+        'Lucid',
+        'Maserati',
+        'Mazda',
+        'McLaren',
+        'Mercedes-Benz',
+        'Mercury',
+        'Mitsubishi',
+        'Nissan',
+        'Oldsmobile',
+        'Peugeot',
+        'Polestar',
+        'Pontiac',
+        'Porsche',
+        'Regal',
+        'Rivian',
+        'Rolls-Royce',
+        'Saab',
+        'Saturn',
+        'Subaru',
+        'Suzuki',
+        'Tesla',
+        'Toyota',
+        'Volkswagen',
+        'Volvo'
+      ],
       car: {
         make: '',
         model: '',
@@ -81,16 +142,16 @@ export default {
     };
   },
   methods: {
-    getAvailableSpots(){
+    getAvailableSpots() {
       ParkingSpotsService.getParkingSpotByAvailability(true)
-      .then(response =>{
-        this.parkingSpotsDropdown = response.data;
-      })
-      .catch(error=>{
-        console.error('Error getting available parking spots;',error);
-      });
+        .then(response => {
+          this.parkingSpotsDropdown = response.data;
+        })
+        .catch(error => {
+          console.error('Error getting available parking spots;', error);
+        });
     },
-    setPatronName(){
+    setPatronName() {
       let foundPatron = this.patronDropdown.find(item => item.phoneNumber.trim() == this.patron.phoneNumber.trim());
       this.patron.name = foundPatron.name;
     },
@@ -98,6 +159,10 @@ export default {
     setPatronPhoneNumber() {
       let foundPatron = this.patronDropdown.find(item => item.name.trim() == this.patron.name.trim());
       this.patron.phoneNumber = foundPatron.phoneNumber;
+    },
+
+    setCarMake() {
+      this.carMakeList.find(item => item.carMakeList == this.car.make.trim());
     },
 
     getPatronDropdown() {
@@ -187,7 +252,7 @@ h2 {
 
 .form-group label {
   margin-bottom: 15px;
-color: white;
+  color: white;
 }
 
 label {
