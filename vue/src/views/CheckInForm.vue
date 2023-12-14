@@ -9,7 +9,6 @@
             {{ carMake }}
           </option>
         </select>
-        <!-- <input id="make" v-model="car.make" required> -->
       </div>
       <div class="form-group">
         <label for="model">Car Model:</label>
@@ -161,10 +160,7 @@ export default {
       this.patron.phoneNumber = foundPatron.phoneNumber;
     },
 
-    setCarMake() {
-      this.carMakeList.find(item => item.carMakeList == this.car.make.trim());
-    },
-
+    
     getPatronDropdown() {
 
       PatronsService.getAllPatrons()
@@ -182,11 +178,6 @@ export default {
         alert('Please fill all the fields correctly.');
         return;
       }
-
-      // const selectedPatron = this.patronDropdown.find(patron => patron.patronId === this.selectedPatron);
-
-      // this.patron.name = selectedPatron.name;
-      // this.patron.phoneNumber = selectedPatron.phoneNumber;
 
       const carCheckInData = {
         ...this.car,
@@ -206,6 +197,7 @@ export default {
           alert('An error occurred during form submission');
         });
     },
+
     clearForm() {
       this.car = {
         make: '',
@@ -221,6 +213,7 @@ export default {
       this.arrivalTime = '';
       this.spotNumber = '';
     },
+    
     validateForm() {
       return this.car.make && this.car.model && this.car.color &&
         this.car.licensePlate && this.car.vinNumber &&
