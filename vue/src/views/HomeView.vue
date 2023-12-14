@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <div class="image-text-container">
+    <div class="image-container">
+      <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '800px', height: '780px'}">
+    </div>
+  <div class="text-container">
        
     <h1>Servizio di Auto</h1>
 
@@ -8,10 +13,10 @@
 <p class="p3">Indulge in the convenience of our valet services, where attention to detail is paramount. From the moment you entrust us with your vehicle, rest assured that it will be handled with the utmost care and professionalism. Our valet team is here to create a seamless transition from the bustling world outside to the tranquil ambiance within.</p>
 <p class="p4">At Servizio di Auto, we believe that every element contributes to a truly extraordinary dining experience. Allow us to set the stage for an evening of gastronomic delight, complemented by the luxury and sophistication that define our Michelin-starred Italian restaurant.</p>
 <p class="p5">Experience the epitome of service and style – both on your plate and in our valet services. Welcome to Servizio di Auto, where luxury is not just a service; it's an integral part of our culinary narrative.</p>
-
-
-    <p class="temp">The current temperature in Pittsburgh is {{ current.current.temperature_2m }}{{ current.current_units.temperature_2m }}</p>
+<p class="temp">The current temperature in Pittsburgh is {{ current.current.temperature_2m }}{{ current.current_units.temperature_2m }}</p>
   </div>
+</div>
+</div>
 </template>
 
 <script>
@@ -87,22 +92,23 @@ export default {
 </script>
 
 <style>
-p.description {
-  color: #e1e1e1; 
-  font-size: 1rem;
-  margin-top: 1em;
-  padding: 0 2em; /* Adds padding on the sides for better readability */
-  border-top: 2px solid #bb29eb; /* Adds a stylistic line above the description */
-  border-bottom: 2px solid #bb29eb; /* Adds a stylistic line below the description */
-  background-color: rgba(187, 41, 235, 0.1); /* Slight purple background for the description box */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  border-radius: 5px; /* Rounded corners for the description box */
+.image-text-container {
+  display: flex;
 }
-
+.image-container {
+  width: 800px;
+  height: 800px;
+  max-width: 100%;
+  max-height: 100%;
+}
+.text-container {
+  flex: 1;
+  padding-left: 20px;
+}
 .home {
   height: 100vh;
   width: 100vw;
-  background: #0a0a0a; 
+  background: 0a0a; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -151,7 +157,7 @@ p {
 
 .description{
   margin: 40px;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 1.5;
   color: white; 
   margin-bottom: 15px; 
@@ -160,7 +166,7 @@ p {
 
 .p2, .p3, .p4, .p5{
   margin: 40px;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 1.5;
   color: white; 
   margin-bottom: 15px; 
@@ -175,7 +181,6 @@ p {
   margin-bottom: 15px; 
   font-style: italic;
   text-shadow: 0 0 10px blue;
-
 }
 </style>
 
