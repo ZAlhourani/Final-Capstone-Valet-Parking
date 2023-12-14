@@ -21,7 +21,6 @@ public class SlipController {
     public SlipController(SlipsDao slipsDao) {
         this.slipsDao = slipsDao;
     }
-//    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/slips")
     public List<Slips> getAllSlipsList(){
         return slipsDao.getAllSlips();
@@ -38,7 +37,6 @@ public class SlipController {
        }
    }
 
-//    @PreAuthorize("hasRole('ROLE_VALET')")
     @GetMapping("/slips/patrons/{patronId}")
     public List<Slips> getSlipsByPatronId (@PathVariable int patronId){
         List<Slips> result = slipsDao.getSlipByPatronId(patronId);
@@ -67,7 +65,6 @@ public class SlipController {
         return slipsDao.createNewSlip(newSlip);
     }
 
-//    @PreAuthorize("hasRole('ROLE_VALET')")
     @PutMapping("/slips/{slipNumber}")
     public Slips updateSlip (@PathVariable int slipNumber, @RequestBody Slips updatedSlip) {
         updatedSlip.setSlipNumber(slipNumber);

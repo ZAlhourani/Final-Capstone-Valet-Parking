@@ -9,6 +9,9 @@
         Lot is full
         <font-awesome-icon :icon="['far', 'face-frown']" />
       </div>
+      <div class="image-container1">
+      <img src="Parking Img.png" alt="Parking Valet Logo" :style="{width: '650px', height: '630px'}">
+    </div>
     </div>
   </div>
 </template>
@@ -53,7 +56,7 @@ export default {
   <style>
 .font-awesome-icon {
   margin-left: 10px;
-  color: white; /* Or any color that suits your alert */
+  color: white;
 }
 
 .availability-container {
@@ -105,6 +108,8 @@ export default {
 .spaces {
   font-size: 20px;
 }
+
+
 
 
 

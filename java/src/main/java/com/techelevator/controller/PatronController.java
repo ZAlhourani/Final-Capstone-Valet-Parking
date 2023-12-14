@@ -39,7 +39,6 @@ public class PatronController {
         }
     }
 
-//    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/patrons/user/{userId}")
     public Patrons getPatronIdByUserId (@PathVariable int userId) {
 
